@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamada de Vídeo</title>
+</head>
+<body>
+    <h1>Sistema de Chamada de Vídeo</h1>
+    <div>
+        <video id="localVideo" autoplay playsinline></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+    </div>
+    <button id="startButton">Iniciar Chamada</button>
+    <button id="hangupButton" disabled>Encerrar Chamada</button>
+
+    <script>
+        let localStream;
+let remoteStream;
+let localPeerConnection;
+let remotePeerConnection;
+
+const startButton = document.getElementById('startButton');
+const hangupButton = document.getElementById('hangupButton');
+const localVideo = document.getElementById('localVideo');
+const remoteVideo = document.getElementById('remoteVideo');
+
+startButton.addEventListener('click', startCall);
+hangupButton.addEventListener('click', hangupCall);
+
+async function startCall() {
+    // Obter stream local (vídeo)
+    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    localVideo.srcObject = localStream;
+
+    // Configurar conexões ponto a ponto
+    const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+    localPeerConnection = new RTCPeerConnection(configuration);
+    remotePeerConnection = new RTCPeerConnection(configuration);
+
+    // Adicionar a stream local à conexão
+    localStream.getTracks().forEach(track => localPeerConnection.addTrack(track, localStream));
+
+    // Manipular a conexão ICE
+    localPeerConnection.onicecandidate = e => {
+        if (e.candidate) {
+            remotePeerConnection.addIceCandidate(e.candidate);
+        }
+    };
+    remotePeerConnection.onicecandidate = e => {
+        if (e.candidate) {
+            localPeerConnection.addIceCandidate(e.candidate);
+        }
+    };
+
+    // Receber a stream remota
+    remotePeerConnection.ontrack = e => {
+        remoteVideo.srcObject = e.streams[0];
+        remoteStream = e.streams[0];
+    };
+
+    // Criar a oferta e troca de SDP (Session Description Protocol)
+    const offer = await localPeerConnection.createOffer();
+    await localPeerConnection.setLocalDescription(offer);
+    await remotePeerConnection.setRemoteDescription(offer);
+
+    const answer = await remotePeerConnection.createAnswer();
+    await remotePeerConnection.setLocalDescription(answer);
+    await localPeerConnection.setRemoteDescription(answer);
+
+    startButton.disabled = true;
+    hangupButton.disabled = false;
+}
+
+function hangupCall() {
+    localPeerConnection.close();
+    remotePeerConnection.close();
+    localPeerConnection = null;
+    remotePeerConnection = null;
+    
+    startButton.disabled = false;
+    hangupButton.disabled = true;
+}
+
+    </script>
+</body>
+</html>

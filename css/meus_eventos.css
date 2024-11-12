@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+html, body {
+    height: 100%;
+    background-color: #ffffff;
+    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(83, 136, 75, 1) 100%);
+    overflow-x: hidden;
+}
+
+.center {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+header {
+    height: 100px;
+    padding: 20px 0;
+    background-color: #15471F;
+    box-shadow: 2px 2px 7px rgba(70, 141, 49, 0.4);
+    z-index: 2;
+    width: 100%;
+}
+.center {
+    display: flex;
+    float: right;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+#logo {
+    width: 70px;
+    margin: -5px 20px 0;
+    float: left;
+}
+
+
+#menu, #notificacao, #perfil {
+    width: 80px;
+    margin-top: -10px;
+    margin-left: 15px;
+    padding: 20px;
+    z-index: 0;
+}
+#menu{
+    margin-top: -5px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 30px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color:#15471F;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.side-menu a {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+    display: block;
+    transition: 0.5s;
+}
+
+.side-menu a:hover {
+    background-color: #1c5f29;
+}
+
+.side-menu .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 36px;
+    padding: 5%;
+    cursor: pointer;
+}
+
+h1, h3 {
+    margin: 10px;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease-in-out;
+    color: #fff;
+}
+
+.event {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-in-out forwards;
+    opacity: 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.event h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.event p {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.event:hover {
+    transform: translateY(-10px);
+}
+
+.event:hover iframe {
+    transform: scale(1.02);
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+button {
+    background-color: #007BFF; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    margin-bottom: 10px; 
+}
+
+button:hover {
+    background-color: #0056b3; 
+}
+.modal {
+    display: none; /* Esconde o modal */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Botão de fechar */
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+input{
+    width: 100%;
+    margin-bottom: 10px;
+}
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+.save-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.save-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.event {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}

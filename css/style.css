@@ -1,0 +1,132 @@
+/* Fonte importada */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+@font-face {
+    font-family: 'Azonix';
+    src: url('../azonix/Azonix.otf') format('opentype'); /* Ajuste o caminho se necessário */
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Estilos básicos */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f4;
+}
+
+span {
+    font-family: 'Azonix', sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    color: #fdfdfd;
+    position: relative; /* Importante para garantir que os elementos fiquem na tela */
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    animation: slideIn 1.5s ease-out;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: #ffffff;
+    animation: fadeIn 2s ease-out;
+}
+
+.logo {
+    width: 300px;
+    margin-top: 20px;
+    animation: bounceIn 2s ease-in-out;
+}
+
+/* Botão interativo */
+.start-btn {
+    margin-top: 3rem;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #53884B;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    animation: buttonFadeIn 3s ease-out forwards;
+    opacity: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.start-btn:hover {
+    background-color: #3e6d3a;
+}
+
+/* Animações */
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes buttonFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Background animado */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(83, 136, 75, 1) 100%);
+    clip-path: circle(50% at 50% 50%);
+    animation: expandBackground 4s ease-out forwards;
+}
+
+@keyframes expandBackground {
+    0% {
+        clip-path: circle(10% at 50% 50%);
+    }
+    100% {
+        clip-path: circle(150% at 50% 50%);
+    }
+}

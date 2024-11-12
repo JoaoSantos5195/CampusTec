@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nova Square', sans-serif;
+    font-weight: 600;
+}
+
+html, body {
+    height: 100%;
+    background-color: #ffffff;
+    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(83, 136, 75, 1) 100%);
+    overflow-x: hidden;
+}
+
+.center {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+header {
+    height: 100px;
+    padding: 20px 0;
+    background-color: #15471F;
+    box-shadow: 2px 2px 7px rgba(70, 141, 49, 0.4);
+    z-index: 2;
+    width: 100%;
+}
+.center {
+    display: flex;
+    float: right;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+#logo {
+    width: 70px;
+    margin: -5px 20px 0;
+    float: left;
+}
+
+#buscar {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+#menu, #notificacao, #perfil {
+    width: 80px;
+    margin-top: -10px;
+    margin-left: 15px;
+    padding: 20px;
+    z-index: 0;
+}
+#menu{
+    margin-top: -5px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 30px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color:#15471F;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.side-menu a {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+    display: block;
+    transition: 0.5s;
+}
+
+.side-menu a:hover {
+    background-color: #1c5f29;
+}
+
+.side-menu .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 36px;
+    padding: 5%;
+    cursor: pointer;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+}
+
+form {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], input[type="date"], input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #15471F;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+button[type="submit"]:hover {
+    background-color: #1c5f29;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 2px 2px 7px rgba(70, 141, 49, 0.4);
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
