@@ -72,13 +72,30 @@
         <a href="sobre_nos.html">Sobre Nós</a>
 </div>
 
+
+
 <div class="search-container">
     <h1 id="buscar">Lista de Candidatos</h1>
+    <div class="filter-container">
+    <form action="processa_cand.php" method="GET">
+        <label for="filter">Filtrar Candidatos:</label>
+        <select name="filter" id="filter">
+            <option value="">Selecione uma opção</option>
+            <option value="curriculo">Com Currículo</option>
+            <option value="area">Por Área</option>
+            <option value="soft_skills">Com Soft Skills</option>
+            <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
+        </select>
+        <button type="submit">Aplicar Filtro</button>
+    </form>
+</div>
     <div id="resultado-busca" class="resultado-busca">
         <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
         <?php include 'processa_cand.php'; ?> <!-- Arquivo PHP que exibe recrutadores -->
     </div>
 </div>
+
+
 
 <footer id="footer">
     <p>&copy; 2024 CampusTec. Todos os direitos reservados.</p>
