@@ -77,7 +77,7 @@
 <div class="search-container">
     <h1 id="buscar">Lista de Candidatos</h1>
     <div class="filter-container">
-    <form action="processa_cand.php" method="GET">
+    <form action="processa_cand_filter.php" method="GET">
         <label for="filter">Filtrar Candidatos:</label>
         <select name="filter" id="filter">
             <option value="">Selecione uma opção</option>
