@@ -1,5 +1,5 @@
 <?php
-include ('conexao.php');
+include('conexao.php');
 
 // Verificar se o formulário foi submetido via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailInstitucional = $_POST['emailInstitucional'] ?? '';
     $emailPessoal = $_POST['emailPessoal'] ?? '';
     $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Criptografando a senha
-    $biografia = $_POST['biografia'] ?? '';
+    $biografia = $_POST['biografia'] ?? null; // Permitir NULL para biografia
     $curriculoDestino = null; // Inicializa como null
 
     // Tratamento do upload do arquivo de currículo
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Inserir os dados no banco de dados
     $stmt = $conn->prepare("INSERT INTO usuarios (nomeCompleto, numeroTel, curso, emailInstitucional, emailPessoal, senha, biografia, curriculo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     if ($stmt) {
-        // Bind dos parâmetros; curriculo pode ser NULL se não enviado
+        // Bind dos parâmetros; biografia e curriculo podem ser NULL
         $stmt->bind_param("ssssssss", $nomeCompleto, $numeroTel, $curso, $emailInstitucional, $emailPessoal, $senha, $biografia, $curriculoDestino);
 
         if ($stmt->execute()) {
@@ -46,4 +46,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Fechar a conexão com o banco de dados
 $conn->close();
-?>
