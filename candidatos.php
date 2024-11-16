@@ -64,10 +64,9 @@
 <div id="side-menu" class="side-menu">
     <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
     <a href="#">Tutorial</a>
-        <a href="curriculo.html">Criador de currículo</a>
         <a href="recrutadores.html">Recrutadores</a>
-        <a href="visualizar_evento.php">Eventos</a>
-        <a href="editar-perfil.php">Configurações</a>
+        <a href="eventosRecrutador.php">Eventos</a>
+        <a href="editar_perfil_rec.php">Configurações</a>
         <a href="logout.php">Logout</a>
         <a href="sobre_nos.html">Sobre Nós</a>
 </div>
