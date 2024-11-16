@@ -71,12 +71,11 @@ $conn->close();
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
-        
-        <a href="sobre_nos.html">Sobre Nós</a>
         <a href="logout.php">Logout</a>
         <a href="candidatos.php">Candidatos</a>
         <a href="eventosRecrutador.php">Eventos</a>
-        <a href="#">Configurações</a>
+        <a href="editar_perfil_rec.php">Configurações</a>
+        <a href="sobre_nos.html">Sobre Nós</a>
     </div>
     <h1>Postagem de Eventos</h1>
 
