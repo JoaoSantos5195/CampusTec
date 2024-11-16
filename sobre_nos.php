@@ -100,11 +100,11 @@ include('header_candidato.php');
             <h2>Criadores</h2><br>
 
             <ul>
-                <li>Arthur Santana dos Santos</li>
-                <li>Bruno Rodrigues da Costa</li>
-                <li>João Pedro da Penha Santos</li>
-                <li>Kaio Jesus de Sousa</li>
-                <li>Kauê Nunes dos Santos</li>
+                <li>Arthur Santana dos Santos - Desenvolvedor Full-Stack</li>
+                <li>Bruno Rodrigues da Costa - Gestor</li>
+                <li>João Pedro da Penha Santos - Desenvolvedor Full-Stack</li>
+                <li>Kaio Jesus de Sousa - Designer</li>
+                <li>Kauê Nunes dos Santos - Designer</li>
             </ul>
 
 
