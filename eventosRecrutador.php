@@ -2,21 +2,24 @@
 include('conexao.php');
 session_start();
 
-// Verifica se o usuário está logado e obtém seu ID
-if (!isset($_SESSION['id_recrutador'])) {
+// Verifica se o usuário está logado e obtém seu email
+if (!isset($_SESSION["email"])) {
     header("Location: login.php");
     exit();
 }
 
-$criador_id = $_SESSION['id_recrutador'];
+$criador_id = $_SESSION["email"];
 
 // Selecionar eventos criados pelo usuário logado
 $sql = "SELECT id, nome, data, local, google_maps_link FROM eventos WHERE criador_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $criador_id);
+
+// Corrigido: usar "s" para strings no bind_param
+$stmt->bind_param("s", $criador_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
