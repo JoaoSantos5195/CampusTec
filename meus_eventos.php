@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('conexao.php');
+include('header_candidato.php');
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['email'])) {
@@ -46,31 +47,6 @@ $conn->close();
 </head>
 
 <body>
-    <header>
-        <div>
-            <a href="home.html"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></a>
-        </div>
-        <div class="logo">
-            <div class="center">
-                <div class="menu">
-                    <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
-                    <a href="perfilRecrutador.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
-                    <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div id="side-menu" class="side-menu">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
-        <a href="#">Tutorial</a>
-        <a href="curriculo.html">Criador de currículo</a>
-        <a href="recrutadores.html">Recrutadores</a>
-        <a href="visualizar_evento.php">Eventos</a>
-        <a href="editar-perfil.php">Configurações</a>
-        <a href="logout.php">Logout</a>
-        <a href="sobre_nos.html">Sobre Nós</a>
-    </div>
 
     <div class="eventos-container">
         <?php

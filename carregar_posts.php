@@ -22,13 +22,14 @@ if ($result->num_rows > 0) {
         </div>";
     }
 } else {
-    echo "<p>Não há postagens disponíveis.</p>";
+    echo '<p style="color: white; font-size: 24px; text-align: center;">Não há postagens disponíveis.</p>';
 }
 
 $conn->close();
 
 // Função para renderizar imagem ou vídeo
-function renderizarArquivo($caminho) {
+function renderizarArquivo($caminho)
+{
     if (empty($caminho)) {
         return "";
     }
@@ -46,4 +47,3 @@ function renderizarArquivo($caminho) {
         return "<p>[Arquivo não suportado]</p>";
     }
 }
-?>
