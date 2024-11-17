@@ -1,12 +1,12 @@
 <?php
+session_start(); // Inicia a sessão para acessar os dados do usuário logado
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-
-session_start(); // Inicia a sessão para acessar os dados do usuário logado
 
 include('conexao.php');
 
@@ -45,4 +45,3 @@ if ($stmt = $conn->prepare($sql)) {
 
 // Fecha a conexão
 $conn->close();
-?>

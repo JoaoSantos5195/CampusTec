@@ -1,6 +1,7 @@
 <?php
 include('conexao.php');
 session_start();
+include('header_rec.php');
 
 // Verifica se o usuário está logado e obtém seu ID
 if (!isset($_SESSION['id_recrutador'])) {
@@ -24,25 +25,12 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Meus Eventos</title>
     <link rel="stylesheet" href="css/visualizar_evento.css">
 </head>
 
 <body>
-    <header>
-        <div>
-            <a href="postar_evento.php"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></a>
-            <div class="logo">
-                <div class="center">
-                    <div class="menu">
-                        <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
-                        <a href="perfilRecrutador.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
-                        <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
     <h1>Meus Eventos</h1>
 

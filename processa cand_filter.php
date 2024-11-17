@@ -1,5 +1,5 @@
 <?php
-include('conexao.php')
+include('conexao.php');
 
 // Obtenha o valor do filtro selecionado
 $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
