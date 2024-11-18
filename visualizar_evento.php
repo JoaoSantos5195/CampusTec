@@ -68,7 +68,7 @@ $result = $conn->query($sql);
             echo "</div>";
         }
     } else {
-        echo "Nenhum evento encontrado.";
+        echo "<p style='font-size: 30px; color: white; text-align:center; margin:5%'>Nenhum evento encontrado.</p>";
     }
     ?>
 

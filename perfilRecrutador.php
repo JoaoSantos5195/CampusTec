@@ -93,7 +93,7 @@ $conn->close();
     <div class="profile-info">
         <h2 class="nome">Recrutador: <?php echo htmlspecialchars($recrutador['nomeCompleto']); ?></h2>
         <h3 class="cargo">Cargo: <?php echo htmlspecialchars($recrutador['setor']); ?></h3><br>
-        <h3 class="email">Email: <?php echo htmlspecialchars($recrutador['emailCorporativo']); ?></h3><br>
+        <h3 class="email">Email corportativo: <?php echo htmlspecialchars($recrutador['emailCorporativo']); ?></h3><br>
         <h3 class="instituicao">Instituição: <?php echo htmlspecialchars($recrutador['empresa']); ?></h3><br>
         <hr>
         <p class="bioTitulo">Biografia:</p>
