@@ -60,7 +60,6 @@ include('header_rec.php');
 
 <body>
 
-<<<<<<< HEAD
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
@@ -70,8 +69,7 @@ include('header_rec.php');
         <a href="logout.php">Logout</a>
         <a href="sobre_nos.html">Sobre Nós</a>
     </div>
-=======
->>>>>>> fb3b766b5bfa1dd674775be0b8522ed66beb4f3d
+
     <h1>Postagem de Eventos</h1>
 
     <!-- Formulário de Postagem -->

@@ -1,5 +1,4 @@
 <?php
-session_start(); // Inicia a sessão para acessar os dados do usuário logado
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;

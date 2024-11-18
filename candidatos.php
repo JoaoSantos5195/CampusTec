@@ -159,14 +159,13 @@
         </div>
     </header>
 
-<<<<<<< HEAD
 <div id="side-menu" class="side-menu">
 <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
         <a href="candidatos.php">Candidatos</a>
         <a href="eventosRecrutador.php">Eventos</a>
         <a href="editar_perfil_rec.php">Configurações</a>
-=======
+
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
@@ -175,7 +174,6 @@
         <a href="postar_evento.php">Adicionar evento</a>
         <a href="editar_perfil_rec.php">Configurações</a>
         <a href="sobre_nos.php">Sobre Nós</a>
->>>>>>> fb3b766b5bfa1dd674775be0b8522ed66beb4f3d
         <a href="logout.php">Logout</a>
     </div>
 
@@ -189,25 +187,25 @@
 
 
 
-    <div class="search-container">
-        <h1 id="buscar">Lista de Candidatos</h1>
-        <div class="filter-container">
-            <form action="processa_cand_filter.php" method="GET">
-                <label for="filter">Filtrar Candidatos:</label>
-                <select name="filter" id="filter">
-                    <option value="">Selecione uma opção</option>
-                    <option value="curriculo">Com Currículo</option>
-                    <option value="area">Por Área</option>
-                    <option value="soft_skills">Com Soft Skills</option>
-                    <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
-                </select>
-                <button type="submit">Aplicar Filtro</button>
-            </form>
-        </div>
-        <div id="resultado-busca" class="resultado-busca">
-            <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
-            <?php include 'processa_cand.php'; ?> <!-- Arquivo PHP que exibe recrutadores -->
-        </div>
+</div>
+<div class="search-container">
+    <h1 id="buscar">Lista de Candidatos</h1>
+    <div class="filter-container">
+        <form action="processa_cand_filter.php" method="GET">
+            <label for="filter">Filtrar Candidatos:</label>
+            <select name="filter" id="filter">
+                <option value="">Selecione uma opção</option>
+                <option value="curriculo">Com Currículo</option>
+                <option value="area">Por Área</option>
+                <option value="soft_skills">Com Soft Skills</option>
+                <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
+            </select>
+            <button type="submit">Aplicar Filtro</button>
+        </form>
+    </div>
+    <div id="resultado-busca" class="resultado-busca">
+        <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
+        <?php include 'processa_cand.php'; ?> <!-- Arquivo PHP que exibe recrutadores -->
     </div>
 
 
