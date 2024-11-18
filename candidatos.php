@@ -194,12 +194,59 @@
         <form action="processa_cand_filter.php" method="GET">
             <label for="filter">Filtrar Candidatos:</label>
             <select name="filter" id="filter">
-                <option value="">Selecione uma opção</option>
-                <option value="curriculo">Com Currículo</option>
-                <option value="area">Por Área</option>
-                <option value="soft_skills">Com Soft Skills</option>
-                <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
+                <optgroup label="Selecione uma opção">
+                    <option value="curriculo">Com Currículo</option>
+                    <option value="soft_skills">Com Soft Skills</option>
+                    <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
+                </optgroup>
+                <optgroup label="Tecnologia">
+                    <option value="dsEtim">Desenvolvimento de Sistemas (ETIM)</option>
+                    <option value="ciencia_computacao">Ciência da Computação</option>
+                </optgroup>
+                <optgroup label="Saúde">
+                    <option value="nutriEtim">Nutrição (ETIM)</option>
+                    <option value="medicina">Medicina</option>
+                    <option value="enfermagem">Enfermagem</option>
+                    <option value="psicologia">Psicologia</option>
+                    <option value="odontologia">Odontologia</option>
+                    <option value="fisioterapia">Fisioterapia</option>
+                    <option value="biomedicina">Biomedicina</option>
+                    <option value="educacao_fisica">Educação Física</option>
+                </optgroup>
+                <optgroup label="Engenharias">
+                    <option value="engenharia_civil">Engenharia Civil</option>
+                    <option value="engenharia_eletrica">Engenharia Elétrica</option>
+                </optgroup>
+                <optgroup label="Humanas">
+                    <option value="direito">Direito</option>
+                    <option value="geografia">Geografia</option>
+                    <option value="historia">História</option>
+                    <option value="filosofia">Filosofia</option>
+                    <option value="pedagogia">Pedagogia</option>
+                    <option value="jornalismo">Jornalismo</option>
+                    <option value="letras">Letras</option>
+                </optgroup>
+                <optgroup label="Exatas">
+                    <option value="arquitetura">Arquitetura</option>
+                    <option value="matematica">Matemática</option>
+                    <option value="fisica">Física</option>
+                    <option value="quimica">Química</option>
+                    <option value="economia">Economia</option>
+                </optgroup>
+                <optgroup label="Artes e Comunicação">
+                    <option value="publicidade">Publicidade</option>
+                    <option value="design">Design</option>
+                    <option value="teatro">Teatro</option>
+                    <option value="musica">Música</option>
+                </optgroup>
+                <optgroup label="Administração e Negócios">
+                    <option value="administracao">Administração</option>
+                </optgroup>
+                <optgroup label="Culinária e Gastronomia">
+                    <option value="gastronomia">Gastronomia</option>
+                </optgroup>
             </select>
+
             <button type="submit">Aplicar Filtro</button>
         </form>
     </div>
