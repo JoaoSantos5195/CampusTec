@@ -1,64 +1,62 @@
 <?php
-    session_start();
+session_start();
+include('header_rec.php');
+// Verificar se o usuário está logado
+if (!isset($_SESSION['email'])) {
+    header("Location: login.html");
+    exit();
+}
 
-    // Verificar se o usuário está logado
-    if (!isset($_SESSION['email'])) {
-        header("Location: login.html");
-        exit();
-    }
+// Conectar ao banco de dados
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "campustec";
 
-    // Conectar ao banco de dados
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "campustec";
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
 
-    // Verificar a conexão
-    if ($conn->connect_error) {
-        die("Conexão falhou: " . $conn->connect_error);
-    }
+// Obter o email do usuário logado da sessão
+$email = trim($_SESSION['email']); // Usar trim para remover espaços
+    
 
-    // Obter o email do usuário logado da sessão
-    $email = trim($_SESSION['email']); // Usar trim para remover espaços
+// Consultar o usuário pelo email
+$sql = "SELECT * FROM recrutadores WHERE emailPessoal = ?";
+$stmt = $conn->prepare($sql);
 
-    // Verificar se o email está na sessão corretamente
-    var_dump($email);
+if ($stmt === false) {
+    die("Erro na preparação da consulta: " . $conn->error);
+}
 
-    // Consultar o usuário pelo email
-    $sql = "SELECT * FROM recrutadores WHERE emailPessoal = ?";
-    $stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    if ($stmt === false) {
-        die("Erro na preparação da consulta: " . $conn->error);
-    }
+if ($result->num_rows > 0) {
+    // Extrair os dados do usuário
+    $row = $result->fetch_assoc();
+    $user_id = htmlspecialchars($row['id']);
+    $nomeCompleto = htmlspecialchars($row['nomeCompleto']);
+    $numeroTel = htmlspecialchars($row['numeroTel']);
+    $cpf = htmlspecialchars($row['cpf']);
+    $setor = htmlspecialchars($row['setor']);
+    $emailPessoal = htmlspecialchars($row['emailPessoal']);
+    $emailCorporativo = htmlspecialchars($row['emailCorporativo']);
+    $biografia = htmlspecialchars($row['biografia']);
+    $competencias = htmlspecialchars($row['competencias']);
+    $empresa = htmlspecialchars($row['empresa']);
+} else {
+    echo "Email na sessão: " . $_SESSION['email'];
+    echo "Nenhum usuário encontrado.";
+    exit;
+}
 
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        // Extrair os dados do usuário
-        $row = $result->fetch_assoc();
-        $user_id = htmlspecialchars($row['id']);
-        $nomeCompleto = htmlspecialchars($row['nomeCompleto']);
-        $numeroTel = htmlspecialchars($row['numeroTel']);
-        $cpf = htmlspecialchars($row['cpf']);
-        $setor = htmlspecialchars($row['setor']);
-        $emailPessoal = htmlspecialchars($row['emailPessoal']);
-        $emailCorporativo = htmlspecialchars($row['emailCorporativo']);
-        $biografia = htmlspecialchars($row['biografia']);
-        $competencias = htmlspecialchars($row['competencias']);
-        $empresa = htmlspecialchars($row['empresa']);
-    } else {
-        echo "Email na sessão: " . $_SESSION['email'];
-        echo "Nenhum usuário encontrado.";
-        exit;
-    }
-
-    $stmt->close();
-    $conn->close();
+$stmt->close();
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -223,7 +221,6 @@
 
         }
     </script>
-    <script src="js/notificacao.js"></script>
 </body>
 
 </html>

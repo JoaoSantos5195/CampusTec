@@ -118,9 +118,9 @@
     <a href="feed.php">Feed</a>
     <a href="recrutadores.php">Recrutadores</a>
     <a href="visualizar_evento.php">Eventos</a>
-    <a href="editar_perfil.php">Configurações</a>
-    <a href="logout.php">Logout</a>
+    <a href="editar_perfil.php">Editar Perfil</a>
     <a href="sobre_nos.php">Sobre Nós</a>
+    <a href="logout.php">Logout</a>
 </div>
 
 <div id="notificacaoDialog" class="dialog">
@@ -141,33 +141,6 @@
     }
 
     document.getElementById("menu-btn").onclick = openMenu;
-
-    function buscarVagas(event) {
-        event.preventDefault();
-
-        var busca = document.getElementById('busca').value;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'processa_pesquisa_home.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                document.getElementById('resultado-busca').innerHTML = xhr.responseText;
-            } else {
-                console.error('Erro na requisição AJAX');
-            }
-        };
-
-        xhr.send('busca=' + encodeURIComponent(busca));
-    }
-
-    // Função para lidar com o clique do botão de candidatura
-    function candidatarSe(event, botaoId) {
-        event.preventDefault(); // Previne o envio do formulário
-        var botao = document.getElementById(botaoId);
-        botao.textContent = 'Você se candidatou!';
-        botao.disabled = true; // Desativa o botão após a candidatura
-    }
 
     // Função para abrir e fechar o diálogo de notificações
     document.getElementById('notificacao').addEventListener('click', function() {

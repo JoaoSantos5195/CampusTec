@@ -1,6 +1,7 @@
 <?php
-session_start();
 include('conexao.php');
+session_start();
+include('header_rec.php');
 
 // Verifica se o recrutador está logado
 if (isset($_SESSION['id_recrutador'])) {
@@ -76,24 +77,13 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="id_recrutador" content="<?php echo $_SESSION['id_recrutador'] ?? ''; ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/perfilRecrutador.css">
     <title>Perfil</title>
 </head>
 
 <body>
-    <header>
-        <a href="postar_evento.php">
-            <div class="logo"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></div>
-        </a>
-        <div class="center">
-            <div class="menu">
-                <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
-                <a href="perfilRecrutador.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
-                <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
-            </div>
-        </div>
-    </header>
 
     <div class="profile-header">
         <img src="imagens/fotoCapa.jpg" alt="foto de capa" id="fotoCapa" class="fotoCapa">
@@ -139,23 +129,14 @@ $conn->close();
         </dialog>
     </div>
 
-    <div id="side-menu" class="side-menu">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
-        <a href="#">Tutorial</a>
-        <a href="curriculo.html">Criador de currículo</a>
-        <a href="sobre_nos.html">Sobre Nós</a>
-        <a href="postar_evento.php">Adicionar evento</a>
-        <a href="login_rec.html">Login</a>
-        <a href="editar_perfil_rec.php">Configurações</a>
-    </div>
+
 
     <footer id="footer">
         <p>&copy; 2024 CampusTec. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        function openMenu()
- {
+        function openMenu() {
             document.getElementById("side-menu").style.width = "250px";
         }
 
@@ -183,6 +164,7 @@ $conn->close();
             }
         });
     </script>
+
 
 </body>
 

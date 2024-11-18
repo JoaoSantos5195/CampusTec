@@ -111,11 +111,8 @@ include('header_candidato.php');
             document.getElementById("side-menu").style.width = "0";
         }
         document.getElementById("menu-btn").onclick = openMenu;
-
-        
     </script>
 
-    <script src="js/notificacao"></script>
-</body>
+    </body>
 
 </html>

@@ -50,24 +50,17 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="id_recrutador" content="<?php echo $_SESSION['id_recrutador'] ?? ''; ?>">
     <title>Postagem de Eventos</title>
     <link rel="stylesheet" href="css/postar_evento.css">
 </head>
+<?php
+include('header_rec.php');
+?>
 
 <body>
-    <header>
-        <div>
-            <a href="#"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></a>
-            <div class="logo">
-                <div class="center">
-                    <div class="menu">
-                        <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
-                        <a href="perfilRecrutador.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
-                        <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
-                    </div>
-                </div>
-    </header>
 
+<<<<<<< HEAD
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
@@ -77,6 +70,8 @@ $conn->close();
         <a href="logout.php">Logout</a>
         <a href="sobre_nos.html">Sobre Nós</a>
     </div>
+=======
+>>>>>>> fb3b766b5bfa1dd674775be0b8522ed66beb4f3d
     <h1>Postagem de Eventos</h1>
 
     <!-- Formulário de Postagem -->
@@ -87,17 +82,6 @@ $conn->close();
         <input type="url" name="eventMapLink" placeholder="Link do Google Maps" required>
         <button type="submit" class="addEvent">Adicionar Evento</button>
     </form>
-    <script>
-        function openMenu() {
-            document.getElementById("side-menu").style.width = "250px";
-        }
-
-        function closeMenu() {
-            document.getElementById("side-menu").style.width = "0";
-        }
-
-        document.getElementById("menu-btn").onclick = openMenu;
-    </script>
 
 </body>
 
