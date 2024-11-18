@@ -216,9 +216,10 @@ footer {
     justify-content: center;
     box-shadow: 2px 2px 7px rgba(70, 141, 49, 0.4);
     bottom: 0%;
-    position: sticky;
+    position: fixed;
     width: 100%;
     z-index: 1;
+    margin-left: -10px;
 }
 
 
