@@ -269,35 +269,33 @@
             $sql = "SELECT id, nomeCompleto, emailPessoal, curso, numeroTel FROM usuarios";
 
             // Verifica se existe um filtro selecionado
+            $whereClause = [];
             $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
-            $whereClause = ''; // Inicializa a cláusula WHERE
 
             switch ($filter) {
                 case 'curriculo':
-                    $whereClause = " WHERE curriculo IS NOT NULL"; // Filtrar candidatos com currículo
+                    $whereClause[] = "curriculo IS NOT NULL"; // Filtrar candidatos com currículo
                     break;
-
                 case 'soft_skills':
-                    $whereClause = " WHERE biografia LIKE '%soft skills%'"; // Filtrar candidatos com "soft skills" na biografia
+                    $whereClause[] = "biografia LIKE '%soft skills%'"; // Filtrar candidatos com "soft skills" na biografia
                     break;
-
                 case 'email_institucional':
-                    $whereClause = " WHERE emailPessoal LIKE '%@etec.sp.gov.br'"; // Filtrar e-mails institucionais
-                    break;
-
-                default:
-                    // Filtro por área/curso (se enviado na URL)
-                    $area = isset($_GET['area']) ? $_GET['area'] : '';
-                    if (!empty($area)) {
-                        $whereClause = " WHERE curso = '" . $conn->real_escape_string($area) . "'"; // Filtrar candidatos por curso
-                    }
+                    $whereClause[] = "emailInstitucional LIKE '%@etec.sp.gov.br'"; // Filtrar e-mails institucionais
                     break;
             }
 
-            // Adiciona a cláusula WHERE à consulta SQL, se existir
-            $sql .= $whereClause;
+            // Verifica a existência do filtro de área opcionalmente
+            $area = isset($_GET['area']) ? $conn->real_escape_string($_GET['area']) : '';
+            if (!empty($area)) {
+                $whereClause[] = "curso = '$area'"; // Filtrar candidatos por curso
+            }
 
-            // Prepara a consulta
+            // Concatena as cláusulas WHERE, se existirem
+            if (!empty($whereClause)) {
+                $sql .= ' WHERE ' . implode(' AND ', $whereClause);
+            }
+
+            // Prepara e executa a consulta
             if ($stmt = $conn->prepare($sql)) {
                 // Executa a consulta
                 $stmt->execute();
