@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,14 +161,13 @@
         </div>
     </header>
 
-<<<<<<< HEAD
 <div id="side-menu" class="side-menu">
 <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
         <a href="candidatos.php">Candidatos</a>
         <a href="eventosRecrutador.php">Eventos</a>
         <a href="editar_perfil_rec.php">Configurações</a>
-=======
+
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
@@ -175,7 +176,6 @@
         <a href="postar_evento.php">Adicionar evento</a>
         <a href="editar_perfil_rec.php">Configurações</a>
         <a href="sobre_nos.php">Sobre Nós</a>
->>>>>>> fb3b766b5bfa1dd674775be0b8522ed66beb4f3d
         <a href="logout.php">Logout</a>
     </div>
 
@@ -189,25 +189,147 @@
 
 
 
-    <div class="search-container">
-        <h1 id="buscar">Lista de Candidatos</h1>
-        <div class="filter-container">
-            <form action="processa_cand_filter.php" method="GET">
-                <label for="filter">Filtrar Candidatos:</label>
-                <select name="filter" id="filter">
-                    <option value="">Selecione uma opção</option>
+</div>
+<div class="search-container">
+    <h1 id="buscar">Lista de Candidatos</h1>
+    <div class="filter-container">
+        <form action="" method="GET">
+            <label for="filter">Filtrar Candidatos:</label>
+            <select name="filter" id="filter">
+                <optgroup label="Selecione uma opção">
                     <option value="curriculo">Com Currículo</option>
-                    <option value="area">Por Área</option>
                     <option value="soft_skills">Com Soft Skills</option>
                     <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
-                </select>
-                <button type="submit">Aplicar Filtro</button>
-            </form>
-        </div>
-        <div id="resultado-busca" class="resultado-busca">
-            <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
-            <?php include 'processa_cand.php'; ?> <!-- Arquivo PHP que exibe recrutadores -->
-        </div>
+                </optgroup>
+                <optgroup label="Tecnologia">
+                    <option value="dsEtim">Desenvolvimento de Sistemas (ETIM)</option>
+                    <option value="ciencia_computacao">Ciência da Computação</option>
+                </optgroup>
+                <optgroup label="Saúde">
+                    <option value="nutriEtim">Nutrição (ETIM)</option>
+                    <option value="medicina">Medicina</option>
+                    <option value="enfermagem">Enfermagem</option>
+                    <option value="psicologia">Psicologia</option>
+                    <option value="odontologia">Odontologia</option>
+                    <option value="fisioterapia">Fisioterapia</option>
+                    <option value="biomedicina">Biomedicina</option>
+                    <option value="educacao_fisica">Educação Física</option>
+                </optgroup>
+                <optgroup label="Engenharias">
+                    <option value="engenharia_civil">Engenharia Civil</option>
+                    <option value="engenharia_eletrica">Engenharia Elétrica</option>
+                </optgroup>
+                <optgroup label="Humanas">
+                    <option value="direito">Direito</option>
+                    <option value="geografia">Geografia</option>
+                    <option value="historia">História</option>
+                    <option value="filosofia">Filosofia</option>
+                    <option value="pedagogia">Pedagogia</option>
+                    <option value="jornalismo">Jornalismo</option>
+                    <option value="letras">Letras</option>
+                </optgroup>
+                <optgroup label="Exatas">
+                    <option value="arquitetura">Arquitetura</option>
+                    <option value="matematica">Matemática</option>
+                    <option value="fisica">Física</option>
+                    <option value="quimica">Química</option>
+                    <option value="economia">Economia</option>
+                </optgroup>
+                <optgroup label="Artes e Comunicação">
+                    <option value="publicidade">Publicidade</option>
+                    <option value="design">Design</option>
+                    <option value="teatro">Teatro</option>
+                    <option value="musica">Música</option>
+                </optgroup>
+                <optgroup label="Administração e Negócios">
+                    <option value="administracao">Administração</option>
+                </optgroup>
+                <optgroup label="Culinária e Gastronomia">
+                    <option value="gastronomia">Gastronomia</option>
+                </optgroup>
+            </select>
+
+            <button type="submit">Aplicar Filtro</button>
+        </form>
+    </div>
+    <div id="resultado-busca" class="resultado-busca">
+        <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
+        <?php
+
+            use PHPMailer\PHPMailer\PHPMailer;
+            use PHPMailer\PHPMailer\Exception;
+
+            require 'PHPMailer/src/Exception.php';
+            require 'PHPMailer/src/PHPMailer.php';
+            require 'PHPMailer/src/SMTP.php';
+
+            include('conexao.php');
+
+            // Inicializa a query base
+            $sql = "SELECT id, nomeCompleto, emailPessoal, curso, numeroTel FROM usuarios";
+
+            // Verifica se existe um filtro selecionado
+            $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+            $whereClause = ''; // Inicializa a cláusula WHERE
+
+            switch ($filter) {
+                case 'curriculo':
+                    $whereClause = " WHERE curriculo IS NOT NULL"; // Filtrar candidatos com currículo
+                    break;
+
+                case 'soft_skills':
+                    $whereClause = " WHERE biografia LIKE '%soft skills%'"; // Filtrar candidatos com "soft skills" na biografia
+                    break;
+
+                case 'email_institucional':
+                    $whereClause = " WHERE emailPessoal LIKE '%@etec.sp.gov.br'"; // Filtrar e-mails institucionais
+                    break;
+
+                default:
+                    // Filtro por área/curso (se enviado na URL)
+                    $area = isset($_GET['area']) ? $_GET['area'] : '';
+                    if (!empty($area)) {
+                        $whereClause = " WHERE curso = '" . $conn->real_escape_string($area) . "'"; // Filtrar candidatos por curso
+                    }
+                    break;
+            }
+
+            // Adiciona a cláusula WHERE à consulta SQL, se existir
+            $sql .= $whereClause;
+
+            // Prepara a consulta
+            if ($stmt = $conn->prepare($sql)) {
+                // Executa a consulta
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Verifica se há usuários e exibe em blocos
+                if ($result->num_rows > 0) {
+                    while ($usuario = $result->fetch_assoc()) {
+                        echo '<div class="vaga">';
+                        echo '<h2>Nome: ' . htmlspecialchars($usuario['nomeCompleto']) . '</h2>';
+                        echo '<p>Email: ' . htmlspecialchars($usuario['emailPessoal']) . '</p>';
+                        echo '<p>Curso: ' . htmlspecialchars($usuario['curso']) . '</p>';
+                        echo '<p>Telefone: ' . htmlspecialchars($usuario['numeroTel']) . '</p>';
+                        echo '<form method="post">';
+                        echo '<input type="hidden" name="id" value="' . $usuario['id'] . '">';
+                        echo '<a href="perfilUsuario_view.php?id=' . $usuario['id'] . '"><button type="button">Visualizar Perfil</button></a>';
+                        echo '</form>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p>Nenhum usuário encontrado com o filtro selecionado.</p>';
+                }
+
+                // Fecha a declaração
+                $stmt->close();
+            } else {
+                echo 'Erro ao preparar a consulta: ' . $conn->error;
+            }
+
+            // Fecha a conexão
+            $conn->close();
+        ?>
     </div>
 
 
