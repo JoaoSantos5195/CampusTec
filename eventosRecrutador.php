@@ -4,12 +4,12 @@ session_start();
 include('header_rec.php');
 
 // Verifica se o usuário está logado e obtém seu email
-if (!isset($_SESSION["email"])) {
+if (!isset($_SESSION["id_recrutador"])) {
     header("Location: login.php");
     exit();
 }
 
-$criador_id = $_SESSION["email"];
+$criador_id = $_SESSION["id_recrutador"];
 
 // Selecionar eventos criados pelo usuário logado
 $sql = "SELECT id, nome, data, local, google_maps_link FROM eventos WHERE criador_id = ?";

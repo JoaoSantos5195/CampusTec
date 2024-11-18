@@ -34,7 +34,7 @@ if ($stmt = $conn->prepare($sql)) {
             echo '</div>';
         }
     } else {
-        echo '<p>Nenhum recrutador encontrado.</p>';
+        echo "<p style='font-size: 30px; color: white; text-align:center; margin:5%'>Nenhum recrutador encontrado.</p>";
     }
 
     // Fecha a declaração
