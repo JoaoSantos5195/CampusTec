@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -191,7 +192,7 @@
 <div class="search-container">
     <h1 id="buscar">Lista de Candidatos</h1>
     <div class="filter-container">
-        <form action="processa_cand_filter.php" method="GET">
+        <form action="processa_cand.php" method="GET">
             <label for="filter">Filtrar Candidatos:</label>
             <select name="filter" id="filter">
                 <optgroup label="Selecione uma opção">

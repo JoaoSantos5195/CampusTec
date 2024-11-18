@@ -9,8 +9,37 @@ require 'PHPMailer/src/SMTP.php';
 
 include('conexao.php');
 
-// Consulta SQL para selecionar todos os usuários
+// Inicializa a query base
 $sql = "SELECT id, nomeCompleto, emailPessoal, curso, numeroTel FROM usuarios";
+
+// Verifica se existe um filtro selecionado
+$filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+$whereClause = ''; // Inicializa a cláusula WHERE
+
+switch ($filter) {
+    case 'curriculo':
+        $whereClause = " WHERE curriculo IS NOT NULL"; // Filtrar candidatos com currículo
+        break;
+
+    case 'soft_skills':
+        $whereClause = " WHERE biografia LIKE '%soft skills%'"; // Filtrar candidatos com "soft skills" na biografia
+        break;
+
+    case 'email_institucional':
+        $whereClause = " WHERE emailPessoal LIKE '%@etec.sp.gov.br'"; // Filtrar e-mails institucionais
+        break;
+
+    default:
+        // Filtro por área/curso (se enviado na URL)
+        $area = isset($_GET['area']) ? $_GET['area'] : '';
+        if (!empty($area)) {
+            $whereClause = " WHERE curso = '" . $conn->real_escape_string($area) . "'"; // Filtrar candidatos por curso
+        }
+        break;
+}
+
+// Adiciona a cláusula WHERE à consulta SQL, se existir
+$sql .= $whereClause;
 
 // Prepara a consulta
 if ($stmt = $conn->prepare($sql)) {
@@ -33,7 +62,7 @@ if ($stmt = $conn->prepare($sql)) {
             echo '</div>';
         }
     } else {
-        echo '<p>Nenhum usuário encontrado.</p>';
+        echo '<p>Nenhum usuário encontrado com o filtro selecionado.</p>';
     }
 
     // Fecha a declaração
@@ -44,3 +73,4 @@ if ($stmt = $conn->prepare($sql)) {
 
 // Fecha a conexão
 $conn->close();
+?>
