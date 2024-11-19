@@ -28,8 +28,10 @@ if(isset($_SESSION['email'])){
     }
 }else{
     echo "<h1>Perfil não encontrado</h1>";
-    header(Location: 'login.html');
+    header('Location: login.html');
+    exit;
 }
+
 $stmt->close();
 $conn->close();     
 ?>
@@ -50,8 +52,8 @@ $conn->close();
                 <div class="detalhes"><span><?php echo $nomeCompleto; ?></span></div>
                 <p>Online</p>
 
-                <form method="POST" action="processaPesquisa.php">
-                    <input type="text" name="pesquisar" placeholder="Com quem q uer conversar">
+                <form method="POST" name="pesquisa" action="chat.php">
+                    <input type="text" name="pesquisar" placeholder="Com quem quer conversar">
                     <button type="submit" value="procurar">Procurar</button> 
                 </form>        
             
@@ -59,13 +61,30 @@ $conn->close();
         </div>
     
 <hr>
-
     <div class="userList">
         <img src="#" alt="">
         <div class="detalhes"><span>Nome usuario</span></div>
         <p>Online</p>
         <button type="submit">Conversar</button>
     </div>
+
+    <?php
+        $pesquisar = $_POST['pesquisar'];
+    
+        $query = "SELECT nomeCompleto
+        FROM recrutadores
+        WHERE nomeCompleto LIKE '%$pesquisar%'";
+        
+        $resultado = mysqli_query($conn, $query);   
+    
+        if($resultado->num_rows>0){
+        while($row=mysqli_fetch_array($resultado)){
+            echo $row['nomeCompleto'];
+        }
+    }else{
+        echo "Recrutador não encontrado";
+    }
+    ?>
 
 </body>
 </html>
