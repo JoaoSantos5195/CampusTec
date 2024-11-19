@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
         <div class="logo">
             <div class="center">
                 <div class="menu">
-                <a href="chat_system/chat/login.php">
+                <a href="chat-novo/chat.php">
                     <button style="background-color: transparent; border: none; cursor: pointer; display: flex; float: right;" 
                         data-id="<?php echo htmlspecialchars($id_vaga); ?>">
                     <img src="imagens/chat.png" style="width: 50px; margin-top: 8px">
