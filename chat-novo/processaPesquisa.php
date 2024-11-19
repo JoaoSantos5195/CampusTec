@@ -5,8 +5,11 @@ include('../conexao.php');
 if(isset($_POST['buscaPerfil'])){
     $busca = $_POST['buscaPerfil'];
 
-    $sql = "SELECT id as id, nomeCompleto, emailPessoal
+    $sql = "SELECT id, nomeCompleto, emailPessoal
     FROM recrutadores
-    WHERE "
+    WHERE nomeCompleto LIKE ? or id LIKE ?";
 }
-?>
+
+    $pesquisar = $_POST['pesquisar'];
+    ""
+    ?>

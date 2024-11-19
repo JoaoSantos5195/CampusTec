@@ -28,10 +28,10 @@ if(isset($_SESSION['email'])){
     }
 }else{
     echo "<h1>Perfil não encontrado</h1>";
-    header(location: 'login.html');
+    header(Location: 'login.html');
 }
 $stmt->close();
-$conn->close();
+$conn->close();     
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +50,9 @@ $conn->close();
                 <div class="detalhes"><span><?php echo $nomeCompleto; ?></span></div>
                 <p>Online</p>
 
-                <form action="">
-                    <input type="text" placeholder="Com quem quer conversar">
-                    <button type="submit">Procurar</button> 
+                <form method="POST" action="processaPesquisa.php">
+                    <input type="text" name="pesquisar" placeholder="Com quem q uer conversar">
+                    <button type="submit" value="procurar">Procurar</button> 
                 </form>        
             
             </section>
