@@ -77,9 +77,6 @@ if (isset($_SESSION['email'])) {
                 }
             }
 
-
-            $stmt->close();
-            $conn->close();
             ?>
 
 </body>

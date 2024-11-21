@@ -2,15 +2,31 @@
 session_start();
 include('../conexao.php');
 
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-    $userEmail = $_SESSION['email'];
-    $mensagem = $_POST['mensagem'];
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    if (!isset($_SESSION['email'], $_POST['mensagem'], $_POST['remetente_id'], $_POST['remetente_tipo'])) {
+        echo "Erro: Dados insuficientes.";
+        exit();
+    }
 
-    $query = "INSERT INTO mensagens (usuario_id, mensagem) VALUES (?, ?)";
+    $mensagem = trim($_POST['mensagem']);
+    $remetente_id = intval($_POST['remetente_id']);
+    $remetente_tipo = $_POST['remetente_tipo'];
+
+    if ($mensagem === "") {
+        echo "Erro: Mensagem vazia.";
+        exit();
+    }
+
+    // Inserir mensagem na tabela
+    $query = "INSERT INTO mensagens (remetente_id, remetente_tipo, mensagem) 
+              VALUES (?, ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("is", $usuario_id, $mensagem);
-    $stmt->execute();
+    $stmt->bind_param("iss", $remetente_id, $remetente_tipo, $mensagem);
+
+    if ($stmt->execute()) {
+        echo "Mensagem enviada.";
+    } else {
+        echo "Erro ao enviar mensagem.";
+    }
 }
-
-
 ?>
