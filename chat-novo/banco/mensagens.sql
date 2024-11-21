@@ -1,9 +1,7 @@
 CREATE TABLE mensagens (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    remetente_id INT NOT NULL,
-    remetente_tipo ENUM('candidato', 'recrutador') NOT NULL,
-    destinatario_id INT NOT NULL,
-    destinatario_tipo ENUM('candidato', 'recrutador') NOT NULL,
+    conversa_id INT NOT NULL references conversas('id'),
+    remetente_id INT NOT NULL foreign KEY
     mensagem TEXT NOT NULL,
     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

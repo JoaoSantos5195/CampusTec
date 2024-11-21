@@ -5,7 +5,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['tipo_usuario'])) {
         $_SESSION['tipo_usuario'] = $_POST['tipo_usuario'];
-        header("Location: conversa.php");
+        header("Location: buscaUser.php");
         exit();
     }
 }
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seleção de Tipo de Usuário</title>
+    <title>Quem é você?</title>
 </head>
 
 <body>
