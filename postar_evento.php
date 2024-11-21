@@ -67,6 +67,7 @@ include('header_rec.php');
         <a href="candidatos.php">Candidatos</a>
         <a href="eventosRecrutador.php">Eventos</a>
         <a href="editar_perfil_rec.php">Configurações</a>
+        <a href="tutorial_rec.php">Como usar o sistema</a>
         <a href="logout.php">Logout</a>
         <a href="sobre_nos.html">Sobre Nós</a>
     </div>
