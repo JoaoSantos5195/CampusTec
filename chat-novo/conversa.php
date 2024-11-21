@@ -4,7 +4,7 @@ include('../conexao.php');
 
 // Verificar se o tipo de usuário foi definido
 if (!isset($_SESSION['tipo_usuario'], $_SESSION['email'])) {
-    header("Location: selecionarTipo.php");
+    header("Location: escolha.php");
     exit();
 }
 
