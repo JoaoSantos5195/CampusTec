@@ -48,13 +48,13 @@ if (isset($_GET['id'])) {
         <div class="logo">
             <div class="center">
                 <div class="menu">
-                <a href="chat-novo/chat.php">
-                    <button style="background-color: transparent; border: none; cursor: pointer; display: flex; float: right;" 
-                        data-id="<?php echo htmlspecialchars($id_vaga); ?>">
-                    <img src="imagens/chat.png" style="width: 50px; margin-top: 8px">
-                    </button>
+                    <a href="chat-novo/buscaUser.php">
+                        <button style="background-color: transparent; border: none; cursor: pointer; display: flex; float: right;"
+                            data-id="<?php echo htmlspecialchars($id_vaga); ?>">
+                            <img src="imagens/chat.png" style="width: 50px; margin-top: 8px">
+                        </button>
                     </a>
-                    
+
                     <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
                     <a href="perfilUsuario.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
                     <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
@@ -101,20 +101,20 @@ if (isset($_GET['id'])) {
 
         <hr>
 
-    <?php
+        <?php
         if (isset($recrutador['competencias']) && !empty($recrutador['competencias'])) {
-        echo '<h3 class="habilidades">Competências:</h3><ul>';
-        foreach (explode("\n", $recrutador['competencias']) as $competencia) {
-            if (trim($competencia) !== '') {
-                echo '<li>' . htmlspecialchars(trim($competencia)) . '</li>';
+            echo '<h3 class="habilidades">Competências:</h3><ul>';
+            foreach (explode("\n", $recrutador['competencias']) as $competencia) {
+                if (trim($competencia) !== '') {
+                    echo '<li>' . htmlspecialchars(trim($competencia)) . '</li>';
+                }
             }
-        }
-        echo '</ul>';
+            echo '</ul>';
         } else {
             echo '<p>Competências não informadas.</p>';
         }
-    ?>
-    
+        ?>
+
     </div>
 
 
@@ -132,7 +132,6 @@ if (isset($_GET['id'])) {
             document.getElementById("side-menu").style.width = "0";
         }
         document.getElementById("menu-btn").onclick = openMenu;
-
     </script>
 
     <script src="js/notificacao.js"></script>
