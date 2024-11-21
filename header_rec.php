@@ -121,6 +121,7 @@
     <a href="eventosRecrutador.php">Meus Eventos</a>
     <a href="postar_evento.php">Adicionar evento</a>
     <a href="editar_perfil_rec.php">Editar Perfil</a>
+    <a href="tutorial_rec.php">Como usar o sistema</a>
     <a href="sobre_nos_rec.php">Sobre Nós</a>
     <a href="logout.php">Logout</a>
 </div>

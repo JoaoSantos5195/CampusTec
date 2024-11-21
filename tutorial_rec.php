@@ -72,6 +72,7 @@ include('header_rec.php');
         <a href="sobre_nos.html">Sobre Nós</a>
     </div>
 
+    <iframe src="https://gamma.app/embed/9ym17sgazuu47ns" style="width: 90%; height: 550px; margin-top: 40px; margin-left: 75px" allow="fullscreen" title="CampusTec: Sistema de Empregabilidade – WebApp"></iframe>
 
 </body>
 
