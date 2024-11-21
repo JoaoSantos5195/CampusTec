@@ -7,8 +7,6 @@ if (!isset($_SESSION['email'], $_SESSION['tipo_usuario'])) {
     exit();
 }
 
-$tipo_usuario = $_SESSION['tipo_usuario'];
-
 // Consultar mensagens no banco
 $query = "SELECT m.mensagem, m.data_envio, 
                  r.nomeCompleto AS remetente_nome, 
@@ -17,11 +15,15 @@ $query = "SELECT m.mensagem, m.data_envio,
           LEFT JOIN usuarios r ON m.remetente_id = r.id AND m.remetente_tipo = 'candidato'
           LEFT JOIN recrutadores d ON m.remetente_id = d.id AND m.remetente_tipo = 'recrutador'
           ORDER BY m.data_envio ASC";
+
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "<p><strong>" . htmlspecialchars($row['remetente_nome'] ?? 'Desconhecido') . ":</strong> " . 
+        // Determinar o nome correto do remetente
+        $nome_remetente = $row['remetente_nome'] ?: $row['destinatario_nome'] ?: 'Usuário';
+
+        echo "<p><strong>" . htmlspecialchars($nome_remetente) . ":</strong> " . 
              htmlspecialchars($row['mensagem']) . " <em>(" . $row['data_envio'] . ")</em></p>";
     }
 } else {
