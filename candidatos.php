@@ -255,7 +255,6 @@
     <div id="resultado-busca" class="resultado-busca">
         <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
         <?php
-
             use PHPMailer\PHPMailer\PHPMailer;
             use PHPMailer\PHPMailer\Exception;
 
@@ -272,6 +271,7 @@
             $whereClause = [];
             $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
 
+            // Adiciona filtros com base no valor do parâmetro 'filter'
             switch ($filter) {
                 case 'curriculo':
                     $whereClause[] = "curriculo IS NOT NULL"; // Filtrar candidatos com currículo
@@ -282,17 +282,105 @@
                 case 'email_institucional':
                     $whereClause[] = "emailInstitucional LIKE '%@etec.sp.gov.br'"; // Filtrar e-mails institucionais
                     break;
+                // Filtros por curso
+                case 'dsEtim':
+                    $whereClause[] = "curso LIKE '%dsEtim%'";
+                    break;
+                case 'ciencia_computacao':
+                        $whereClause[] = "curso LIKE '%Ciência da Computação%'";
+                    break;
+                case 'nutriEtim':
+                    $whereClause[] = "curso LIKE '%Nutrição (ETIM)%'";
+                    break;
+                case 'medicina':
+                    $whereClause[] = "curso LIKE '%Medicina%'";
+                    break;
+                case 'enfermagem':
+                    $whereClause[] = "curso LIKE '%Enfermagem%'";
+                    break;
+                case 'psicologia':
+                    $whereClause[] = "curso LIKE '%Psicologia%'";
+                    break;
+                case 'odotonlogia':
+                    $whereClause[] = "curso LIKE '%Odontologia%'";
+                    break;
+                case 'fisioterapia':
+                    $whereClause[] = "curso LIKE '%Fisioterapia%'";
+                    break;
+                case 'biomedicina':
+                    $whereClause[] = "curso LIKE '%Biomedicina%'";
+                    break;
+                case 'educacao_fisica':
+                    $whereClause[] = "curso LIKE '%Educação Física%'";
+                    break;
+                case 'engenharia_civil':
+                    $whereClause[] = "curso LIKE '%Engenharia Civil%'";
+                    break;
+                case 'engenharia_eletrica':
+                    $whereClause[] = "curso LIKE '%Engenharia Elétrica%'";
+                    break;
+                case 'direito':
+                    $whereClause[] = "curso LIKE '%Direito%'";
+                    break;
+                case 'geografia':
+                    $whereClause[] = "curso LIKE '%Geografia%'";
+                    break;
+                case 'historia':
+                    $whereClause[] = "curso LIKE '%História%'";
+                    break;
+                case 'filosofia':
+                    $whereClause[] = "curso LIKE '%Filosofia%'";
+                    break;
+                case 'pedagogia':
+                    $whereClause[] = "curso LIKE '%Pedagogia%'";
+                    break;
+                case 'jornalismo':
+                    $whereClause[] = "curso LIKE '%Jornalismo%'";
+                    break;
+                case 'letras':
+                    $whereClause[] = "curso LIKE '%Letras%'";
+                    break;
+                case 'arquitetura':
+                    $whereClause[] = "curso LIKE '%Arquitetura%'";
+                    break;
+                case 'matematica':
+                    $whereClause[] = "curso LIKE '%Matemática%'";
+                    break;
+                case 'fisica':
+                    $whereClause[] = "curso LIKE '%Física%'";
+                    break;
+                case 'quimica':
+                    $whereClause[] = "curso LIKE '%Química%'";
+                    break;
+                case 'economia':
+                    $whereClause[] = "curso LIKE '%Economia%'";
+                    break;
+                case 'publicidade':
+                    $whereClause[] = "curso LIKE '%Publicidade%'";
+                    break;
+                case 'desing':
+                    $whereClause[] = "curso LIKE '%Desing%'";
+                    break;
+                case 'teatro':
+                    $whereClause[] = "curso LIKE '%Teatro%'";
+                    break;
+                case 'musica':
+                    $whereClause[] = "curso LIKE '%Música%'";
+                    break;
+                case 'administracao':
+                    $whereClause[] = "curso LIKE '%Administração%'";
+                    break;
+                case 'gastronomia':
+                    $whereClause[] = "curso LIKE '%Gastronomia%'";
+                    break;
+                default:
+                    // Sem filtro específico aplicado
+                    break;
             }
 
-            // Verifica a existência do filtro de área opcionalmente
-            $area = isset($_GET['area']) ? $conn->real_escape_string($_GET['area']) : '';
-            if (!empty($area)) {
-                $whereClause[] = "curso = '$area'"; // Filtrar candidatos por curso
-            }
-
-            // Concatena as cláusulas WHERE, se existirem
+            // Monta a cláusula WHERE da consulta, se houver condições
             if (!empty($whereClause)) {
-                $sql .= ' WHERE ' . implode(' AND ', $whereClause);
+                $sql .= " WHERE " . implode(" AND ", $whereClause);
             }
 
             // Prepara e executa a consulta
@@ -328,6 +416,7 @@
             // Fecha a conexão
             $conn->close();
         ?>
+
     </div>
 
 
