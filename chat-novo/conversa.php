@@ -2,10 +2,14 @@
 session_start();
 include('../conexao.php');
 
-// Verificar se o tipo de usuário foi definido
-if (!isset($_SESSION['tipo_usuario'], $_SESSION['email'])) {
-    header("Location: escolha.php");
-    exit();
+if (isset($_SESSION['tipo_usuario'])) {
+    if ($_SESSION['tipo_usuario'] == 'candidato') {
+        include('headerCandidato.php');
+    } elseif ($_SESSION['tipo_usuario'] == 'recrutador') {
+        include('headerRec.php');
+    }
+} else {
+    echo('deu ruim');
 }
 
 $tipo_usuario = $_SESSION['tipo_usuario'];
@@ -43,15 +47,16 @@ $usuario_nome = $usuario['nomeCompleto'];
 <body>
     <h1>Chat - Usuário: <?php echo htmlspecialchars($usuario_nome); ?></h1>
 
-    <form id="form-mensagem">
-        <input type="text" name="mensagem" id="mensagem" placeholder="Digite sua mensagem" required>
-        <input type="hidden" name="remetente_id" value="<?php echo $usuario_id; ?>">
-        <input type="hidden" name="remetente_tipo" value="<?php echo $tipo_usuario; ?>">
-        <button type="submit">Enviar</button>
-    </form>
-
-    <div id="chat">
-        <!-- Mensagens aparecerão aqui -->
+    <div class="tudo">
+        <div id="chat">
+            <!-- Mensagens aparecerão aqui -->
+        </div>
+        <form id="form-mensagem">
+            <input type="text" name="mensagem" id="mensagem" placeholder="Digite sua mensagem" required>
+            <input type="hidden" name="remetente_id" value="<?php echo $usuario_id; ?>">
+            <input type="hidden" name="remetente_tipo" value="<?php echo $tipo_usuario; ?>">
+            <button type="submit">Enviar</button>
+        </form>
     </div>
 
     <script>

@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtenha os dados do POST
     $nomeCompleto = $_POST['nomeCompleto'] ?? '';
     $numeroTel = $_POST['numeroTel'] ?? '';
-    $cpf = $_POST['cpf'] ?? '';
     $setor = $_POST['setor'] ?? '';
     $emailPessoal = $_POST['emailPessoal'] ?? '';
     $emailCorporativo = $_POST['emailCorporativo'] ?? '';
@@ -27,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $empresa = $_POST['empresa'] ?? '';
 
     // Prepare a consulta SQL
-    $sql = "INSERT INTO recrutadores (nomeCompleto, numeroTel, cpf, setor, emailPessoal, emailCorporativo, senha, biografia, empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO recrutadores (nomeCompleto, numeroTel, setor, emailPessoal, emailCorporativo, senha, biografia, empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     // Verifique se a preparação da consulta foi bem-sucedida
@@ -36,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Associe os parâmetros
-    $stmt->bind_param("sssssssss", $nomeCompleto, $numeroTel, $cpf, $setor, $emailPessoal, $emailCorporativo, $senha, $biografia, $empresa);
+    $stmt->bind_param("ssssssss", $nomeCompleto, $numeroTel, $setor, $emailPessoal, $emailCorporativo, $senha, $biografia, $empresa);
 
     // Execute a consulta
     if ($stmt->execute()) {
@@ -55,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Feche a conexão
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,8 +74,6 @@ $conn->close();
                 <input type="text" name="nomeCompleto" placeholder="Nome Completo" required>
 
                 <input type="tel" name="numeroTel" placeholder="Número de telefone" required maxlength="15" id="numeroTel" title="Formato: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX">
-
-                <input type="text" name="cpf" placeholder="Número de CPF" required maxlength="14" id="cpf" title="Formato: XXX.XXX.XXX-XX">
 
                 <select name="setor" id="setor" required>
                     <option value="" disabled selected>Setor de atuação</option>
@@ -123,35 +119,19 @@ $conn->close();
         function mascaraTelefone(value) {
             value = value.replace(/\D/g, ""); // Remove caracteres não numéricos
             if (value.length > 10) {
-                // Formato para celulares (XX) XXXXX-XXXX
                 value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
             } else if (value.length > 5) {
-                // Formato para telefones fixos (XX) XXXX-XXXX
                 value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
             } else if (value.length > 2) {
-                // Parênteses e primeiro pedaço do telefone
                 value = value.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
             } else {
-                // Código de área
                 value = value.replace(/^(\d{0,2})/, "($1");
             }
             return value;
         }
 
-        // Função para aplicar máscara de CPF
-        function mascaraCPF(value) {
-            value = value.replace(/\D/g, ""); // Remove caracteres não numéricos
-            value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, "$1.$2.$3-$4"); // Aplica o formato XXX.XXX.XXX-XX
-            return value;
-        }
-
-        // Aplica as máscaras ao digitar
         document.getElementById('numeroTel').addEventListener('input', function(e) {
             e.target.value = mascaraTelefone(e.target.value);
-        });
-
-        document.getElementById('cpf').addEventListener('input', function(e) {
-            e.target.value = mascaraCPF(e.target.value);
         });
 
         function validatePassword() {
@@ -166,11 +146,8 @@ $conn->close();
         const passwordField = document.querySelector('#senha');
 
         togglePassword.addEventListener('click', function() {
-            // Alterna o tipo de campo entre 'password' e 'text'
             const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordField.setAttribute('type', type);
-
-            // Alterna o ícone entre olho aberto e fechado
             this.classList.toggle('bi-eye');
             this.classList.toggle('bi-eye-slash');
         });
