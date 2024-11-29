@@ -28,19 +28,32 @@ if (!empty($_FILES['imagem']['name'])) {
     }
 }
 
-// Obter ID do usuário logado
-$sql_user = "SELECT id FROM usuarios WHERE emailInstitucional = ? OR emailPessoal = ?";
+// Obter ID e tipo do usuário logado
+$sql_user = "
+    SELECT id, 'usuario' AS tipo_autor 
+    FROM usuarios 
+    WHERE emailInstitucional = ? OR emailPessoal = ? 
+    UNION 
+    SELECT id, 'recrutador' AS tipo_autor 
+    FROM recrutadores 
+    WHERE emailPessoal = ?
+";
 $stmt_user = $conn->prepare($sql_user);
-$stmt_user->bind_param("ss", $email, $email);
+$stmt_user->bind_param("sss", $email, $email, $email);
 $stmt_user->execute();
-$stmt_user->bind_result($usuario_id);
+$stmt_user->bind_result($usuario_id, $tipo_autor);
 $stmt_user->fetch();
 $stmt_user->close();
 
+// Verificar se o usuário foi encontrado
+if (empty($usuario_id) || empty($tipo_autor)) {
+    die("Erro: Usuário não encontrado.");
+}
+
 // Inserir a postagem no banco de dados
-$sql_post = "INSERT INTO posts (usuario_id, texto, imagem) VALUES (?, ?, ?)";
+$sql_post = "INSERT INTO posts (autor_id, tipo_autor, texto, imagem) VALUES (?, ?, ?, ?)";
 $stmt_post = $conn->prepare($sql_post);
-$stmt_post->bind_param("iss", $usuario_id, $texto, $arquivo);
+$stmt_post->bind_param("isss", $usuario_id, $tipo_autor, $texto, $arquivo);
 
 if ($stmt_post->execute()) {
     echo "

@@ -54,6 +54,7 @@ $conn->close();
     <title>Postagem de Eventos</title>
     <link rel="stylesheet" href="css/postar_evento.css">
 </head>
+
 <?php
 include('header_rec.php');
 ?>

@@ -1,73 +1,17 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 14/11/2024 às 01:06
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.0.28
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Banco de dados: `campustec`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `posts_salvos`
---
-
 CREATE TABLE `posts_salvos` (
-  `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `data_salvo` timestamp NOT NULL DEFAULT current_timestamp()
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` INT(11) DEFAULT NULL,       -- Para salvar o usuário
+  `recrutador_id` INT(11) DEFAULT NULL,     -- Para salvar o recrutador
+  `post_id` INT(11) NOT NULL,
+  `tipo_autor` ENUM('usuario', 'recrutador') NOT NULL,
+  `data_salvo` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`),
+  KEY `recrutador_id` (`recrutador_id`),
+  KEY `post_id` (`post_id`),
+  KEY `tipo_autor` (`tipo_autor`),
+  CONSTRAINT `fk_posts_salvos_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_posts_salvos_recrutadores` FOREIGN KEY (`recrutador_id`) REFERENCES `recrutadores` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_posts_salvos_posts` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  CHECK ((`tipo_autor` = 'usuario' AND `usuario_id` IS NOT NULL AND `recrutador_id` IS NULL) OR (`tipo_autor` = 'recrutador' AND `recrutador_id` IS NOT NULL AND `usuario_id` IS NULL))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices de tabela `posts_salvos`
---
-ALTER TABLE `posts_salvos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuario_id` (`usuario_id`),
-  ADD KEY `post_id` (`post_id`);
-
---
--- AUTO_INCREMENT para tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `posts_salvos`
---
-ALTER TABLE `posts_salvos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `posts_salvos`
---
-ALTER TABLE `posts_salvos`
-  ADD CONSTRAINT `posts_salvos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `posts_salvos_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
