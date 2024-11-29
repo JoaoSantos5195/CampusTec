@@ -116,8 +116,8 @@ li{
     background-color: #606060; /* Cor de fundo cinza claro */
     border: 2px solid white;   /* Borda branca */
     border-radius: 12px;       /* Bordas arredondadas */
-    padding: 10px;             /* Espaçamento interno */
-    max-width: 50%;          /* Largura máxima (ajuste conforme necessário) */
+    padding: 20px;             /* Espaçamento interno */
+    max-width: 60%;          /* Largura máxima (ajuste conforme necessário) */
     margin: 0 auto;            /* Centraliza o bloco */
     margin-top: 50px;
     color: white;
@@ -128,7 +128,7 @@ li{
 
 .vagas h2 {
     margin: 0;                 /* Remove margem padrão do h2 */
-    font-size: 18px;           /* Ajuste o tamanho da fonte conforme necessário */
+    font-size: 20px;           /* Ajuste o tamanho da fonte conforme necessário */
     display: flex;             /* Utiliza Flexbox para alinhar os itens */
     justify-content: space-between; /* Espaça o conteúdo com o ícone no fim */
     align-items: center;       /* Alinha verticalmente ao centro */
@@ -200,7 +200,7 @@ dialog.addVaga .fecharJanela:hover {
 
 /* Ícone de Adicionar Vaga (separado do formulário) */
 .bi-plus-circle {
-    font-size: 2rem;
+    font-size: 3rem;
     color: #00c10d;
     cursor: pointer;
     transition: color 0.3s ease;
