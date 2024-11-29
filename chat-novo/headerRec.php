@@ -95,15 +95,14 @@
         margin-top: -5px;
     }
 </style>
-
 <header>
     <div>
-        <a href="home.php"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></a>
+        <a href="../postar_evento.php"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></a>
         <div class="logo">
             <div class="center">
                 <div class="menu">
                     <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
-                    <a href="perfilUsuario.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
+                    <a href="../perfilRecrutador.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
                     <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
                 </div>
             </div>
@@ -111,17 +110,19 @@
     </div>
 </header>
 
+<head>
+    <meta name="id_recrutador" content="<?php echo $_SESSION['id_recrutador'] ?? ''; ?>">
+</head>
+
 <div id="side-menu" class="side-menu">
     <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
-    <a href="entrevista.php">Simulação de Entrevista</a>
-    <a href="curriculo.php">Criador de currículo</a>
-    <a href="feed.php">Feed</a>
-    <a href="recrutadores.php">Recrutadores</a>
-    <a href="visualizar_evento.php">Eventos</a>
-    <a href="meus_eventos.php">Eventos Salvos</a>
-    <a href="editar_perfil.php">Editar Perfil</a>
-    <a href="tutorial_cand.php">Como usar o sistema</a>
-    <a href="sobre_nos.php">Sobre Nós</a>
+    <a href="../tutorial_rec.php">Como usar o sistema</a>
+
+    <a href="../candidatos.php">Candidatos</a>
+    <a href="../eventosRecrutador.php">Meus Eventos</a>
+    <a href="../postar_evento.php">Adicionar evento</a>
+    <a href="../editar_perfil_rec.php">Editar Perfil</a>
+    <a href="../sobre_nos_rec.php">Sobre Nós</a>
     <a href="logout.php">Logout</a>
 </div>
 
@@ -134,6 +135,7 @@
 </div>
 
 <script>
+    // SIDE MENU
     function openMenu() {
         document.getElementById("side-menu").style.width = "250px";
     }
@@ -158,62 +160,63 @@
     // Fechar o diálogo ao clicar fora dele
     window.addEventListener('click', function(event) {
         const dialog = document.getElementById('notificacaoDialog');
-        if (event.target == dialog) {
+        if (event.target === dialog) {
             dialog.style.display = 'none';
         }
     });
 
+    // Função para obter o ID do recrutador
+    function getSessionRecruiterId() {
+        const metaTag = document.querySelector('meta[name="id_recrutador"]');
+        return metaTag ? metaTag.content : null;
+    }
+
     // Função para obter as notificações via AJAX
     function getNotificacoes() {
-        var xhr = new XMLHttpRequest();
+        const userID = getSessionRecruiterId();
+        console.log('ID do recrutador:', userID); // Log para depuração
+        if (!userID) {
+            console.error('ID do recrutador não encontrado');
+            document.getElementById('notificacoes-content').innerHTML = 'Erro ao carregar notificações.';
+            return;
+        }
+
+        const xhr = new XMLHttpRequest();
         xhr.open('POST', 'get_notificacoes.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
             if (xhr.status === 200) {
+                console.log('Resposta do servidor:', xhr.responseText); // Log para depuração
                 try {
-                    var notificacoes = JSON.parse(xhr.responseText);
-                    var notificacoesContent = document.getElementById('notificacoes-content');
+                    const notificacoes = JSON.parse(xhr.responseText);
+                    const notificacoesContent = document.getElementById('notificacoes-content');
                     notificacoesContent.innerHTML = ''; // Limpa o conteúdo anterior
 
                     if (notificacoes.length > 0) {
-                        var html = '';
-                        for (var i = 0; i < notificacoes.length; i++) {
-                            var notificacao = notificacoes[i];
+                        let html = '';
+                        notificacoes.forEach(notificacao => {
+                            html += `<div style="border-bottom: 1px solid #ccc; padding: 10px 0;">`;
+                            html += `<p>${notificacao.mensagem}</p>`;
 
-                            // Adicionar linha separadora
-                            html += '<div style="border-bottom: 1px solid #ccc; padding: 10px 0;">';
-
-                            // Exibir o nome do evento
-                            html += '<p>' + notificacao.mensagem + '</p>';
-
-                            // Adicionar botão "Ver evento" se o ID do evento estiver presente
                             if (notificacao.id) {
-                                html += '<a href="visualizar_evento.php"' + notificacao.id + '</a>';
-                                html += '<button onclick="verEvento(' + notificacao.id + ') id="btn_not">Ver evento</button>';
+                                html += '<button onclick="verEventoRecrutador(' + notificacao.id + ')" style="background-color: #15471F; color: white; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; transition: background-color 0.3s;">Ver evento</button>';
                             }
 
-                            html += '</div>'; // Fechar o bloco da notificação
-                        }
+                            html += `</div>`;
+                        });
                         notificacoesContent.innerHTML = html;
                     } else {
                         notificacoesContent.innerHTML = 'Sem notificações';
                     }
                 } catch (e) {
                     console.error('Erro ao processar as notificações:', e);
-                    notificacoesContent.innerHTML = 'Erro ao carregar notificações';
+                    document.getElementById('notificacoes-content').innerHTML = 'Erro ao carregar notificações.';
                 }
             } else {
                 console.error('Erro na requisição AJAX');
             }
         };
 
-        // Envie o ID do usuário (você precisa ajustar isso de acordo com sua implementação de sessão)
-        var userID = 1; // Defina isso corretamente
-        xhr.send('id_usuario=' + encodeURIComponent(userID));
-    }
-
-    // Função para redirecionar o usuário para a página de visualização de eventos
-    function verEvento(eventoId) {
-        window.location.href = 'visualizar_evento.php?id=' + eventoId;
+        xhr.send('id_recrutador=' + encodeURIComponent(userID));
     }
 </script>

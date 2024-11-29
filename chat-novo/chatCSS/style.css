@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Nova+Square&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+    /* Permite rolar horizontalmente se necessário */
+    background-color: #ffffff;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(83, 136, 75, 1) 100%);
+}
+
+.center {
+    display: flex;
+    float: right;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+header {
+    height: 100px;
+    padding: 20px 0;
+    background-color: #15471F;
+    box-shadow: 2px 2px 7px rgba(70, 141, 49, 0.4);
+    z-index: 2;
+    width: 100%;
+}
+
+#logo {
+    width: 70px;
+    margin: -5px 20px 0;
+    float: left;
+    display: flex;
+    position: relative;
+    z-index: 1000;
+}
+
+#menu,
+#notificacao,
+#perfil {
+    width: 80px;
+    margin-top: -10px;
+    margin-left: 15px;
+    padding: 20px;
+    z-index: 0;
+}
+
+#menu {
+    margin-top: -5px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 30px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #15471F;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.side-menu a {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+    display: block;
+    transition: 0.5s;
+}
+
+.side-menu a:hover {
+    background-color: #1c5f29;
+}
+
+.side-menu .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 36px;
+    padding: 5%;
+    cursor: pointer;
+}
+
+h1{
+    color: white;
+    text-align: center;
+    margin: 5%;
+}
+.tudo{
+    margin: 3%;
+    align-items: center;
+}
+
+#chat {
+    border: 1px solid #ccc;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+    color: white;
+}
+
+#form-mensagem {
+    display: flex;
+    margin-top: 10px;
+}
+
+#form-mensagem input {
+    flex: 1;
+    padding: 5px;
+}
+
+#form-mensagem button {
+    padding: 5px 10px;
+}

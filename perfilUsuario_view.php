@@ -1,17 +1,17 @@
-<?php 
+<?php
 session_start();
 
-include ('conexao.php');
+include('conexao.php');
 
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id_vaga = $_GET['id'];
 
     // Consultar o recrutador baseado na vaga selecionada
     $sql = "SELECT id, nomeCompleto, curso, biografia, emailPessoal, curriculo 
             FROM usuarios
             WHERE id = ?";
-    
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $id_vaga);  // O 'i' indica que estamos passando um inteiro
     $stmt->execute();
@@ -19,7 +19,7 @@ if(isset($_GET['id'])){
 
 
     // Verificar se a consulta retornou algum resultado
-    if($result->num_rows > 0){
+    if ($result->num_rows > 0) {
         $usuario = $result->fetch_assoc();
     } else {
         echo "Usuario nao encontrado.";
@@ -34,24 +34,28 @@ if(isset($_GET['id'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/perfilUsuario_view.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>Perfil de <?php echo htmlspecialchars($usuario['nomeCompleto'])?></title>
+    <title>Perfil de <?php echo htmlspecialchars($usuario['nomeCompleto']) ?></title>
 </head>
+
 <body>
     <header>
-        <a href="postar_evento.php"><div class="logo"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></div></a>
+        <a href="postar_evento.php">
+            <div class="logo"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></div>
+        </a>
         <div class="center">
             <div class="menu">
-            <a href="chat_system/chat/login.php">
-                <button style="background-color: transparent; border: none; cursor: pointer; display: flex; float: right;" 
+                <a href="chat-novo/escolha.php">
+                    <button style="background-color: transparent; border: none; cursor: pointer; display: flex; float: right;"
                         data-id="<?php echo htmlspecialchars($id_vaga); ?>">
-                    <img src="imagens/chat.png" style="width: 50px; margin-top: 8px">
-                </button>
-            </a>
+                        <img src="imagens/chat.png" style="width: 50px; margin-top: 8px">
+                    </button>
+                </a>
                 <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
                 <a href="perfilUsuario.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
                 <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
@@ -73,17 +77,17 @@ if(isset($_GET['id'])){
         <p class="biografia"><?php echo htmlspecialchars($usuario['biografia']); ?></p>
         <hr>
         <h3 class="habilidades">Curriculo:</h3>
-        <p class="curriculo"><?php 
-        // Verificar se o campo de currículo está disponível
-        if (!empty($usuario['curriculo'])) {
-            echo '<a href="uploads/' . htmlspecialchars($usuario['curriculo']) . '" download>';
-            echo '<button type="button" class="btn btn-primary">Baixar Currículo</button>';
-            echo '</a>';
-        } else {
-            echo '<p style="color: white;">Currículo não disponível.</p>';
-        }
-        
-        ?></p>
+        <p class="curriculo"><?php
+                                // Verificar se o campo de currículo está disponível
+                                if (!empty($usuario['curriculo'])) {
+                                    echo '<a href="uploads/' . htmlspecialchars($usuario['curriculo']) . '" download>';
+                                    echo '<button type="button" class="btn btn-primary">Baixar Currículo</button>';
+                                    echo '</a>';
+                                } else {
+                                    echo '<p style="color: white;">Currículo não disponível.</p>';
+                                }
+
+                                ?></p>
     </div>
 
 
@@ -106,6 +110,7 @@ if(isset($_GET['id'])){
         function openMenu() {
             document.getElementById("side-menu").style.width = "250px";
         }
+
         function closeMenu() {
             document.getElementById("side-menu").style.width = "0";
         }
@@ -132,4 +137,5 @@ if(isset($_GET['id'])){
     </script>
 
 </body>
+
 </html>

@@ -98,12 +98,12 @@
 
 <header>
     <div>
-        <a href="home.php"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></a>
+        <a href="../home.php"><img src="imagens/mascote.png" id="logo" alt="CampusTec Logo"></a>
         <div class="logo">
             <div class="center">
                 <div class="menu">
                     <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
-                    <a href="perfilUsuario.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
+                    <a href="../perfilUsuario.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
                     <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>
                 </div>
             </div>
@@ -113,15 +113,14 @@
 
 <div id="side-menu" class="side-menu">
     <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
-    <a href="entrevista.php">Simulação de Entrevista</a>
-    <a href="curriculo.php">Criador de currículo</a>
-    <a href="feed.php">Feed</a>
-    <a href="recrutadores.php">Recrutadores</a>
-    <a href="visualizar_evento.php">Eventos</a>
-    <a href="meus_eventos.php">Eventos Salvos</a>
-    <a href="editar_perfil.php">Editar Perfil</a>
-    <a href="tutorial_cand.php">Como usar o sistema</a>
-    <a href="sobre_nos.php">Sobre Nós</a>
+    <a href="../entrevista.php">Simulação de Entrevista</a>
+    <a href="../curriculo.php">Criador de currículo</a>
+    <a href="../feed.php">Feed</a>
+    <a href="../recrutadores.php">Recrutadores</a>
+    <a href="../visualizar_evento.php">Eventos</a>
+    <a href="../editar_perfil.php">Editar Perfil</a>
+    <a href="../tutorial_cand.php">Como usar o sistema</a>
+    <a href="../sobre_nos.php">Sobre Nós</a>
     <a href="logout.php">Logout</a>
 </div>
 
@@ -188,7 +187,7 @@
 
                             // Adicionar botão "Ver evento" se o ID do evento estiver presente
                             if (notificacao.id) {
-                                html += '<a href="visualizar_evento.php"' + notificacao.id + '</a>';
+                                html += '<a href="../visualizar_evento.php"' + notificacao.id + '</a>';
                                 html += '<button onclick="verEvento(' + notificacao.id + ') id="btn_not">Ver evento</button>';
                             }
 

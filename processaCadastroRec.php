@@ -5,7 +5,6 @@
         // Obtenha os dados do POST
         $nomeCompleto = $_POST['nomeCompleto'] ?? '';
         $numeroTel = $_POST['numeroTel'] ?? '';
-        $cpf = $_POST['cpf'] ?? '';
         $setor = $_POST['setor'] ?? '';
         $emailPessoal = $_POST['emailPessoal'] ?? '';
         $emailCorporativo = !empty($_POST['emailCorporativo']) ? $_POST['emailCorporativo'] : null; // Define como NULL se estiver vazio
@@ -14,8 +13,8 @@
         $competencias = !empty($_POST['competencias']) ? $_POST['competencias'] : null; // Define como NULL se estiver vazio
         $empresa = $_POST['empresa'] ?? '';
 
-        // Prepare a consulta SQL
-        $sql = "INSERT INTO recrutadores (nomeCompleto, numeroTel, cpf, setor, emailPessoal, emailCorporativo, senha, biografia, competencias, empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        // Prepare a consulta SQL sem o CPF
+        $sql = "INSERT INTO recrutadores (nomeCompleto, numeroTel, setor, emailPessoal, emailCorporativo, senha, biografia, competencias, empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         
         // Verifique se a preparação da consulta foi bem-sucedida
@@ -23,8 +22,8 @@
             die('Erro na preparação da consulta: ' . $conn->error);
         }
 
-        // Associe os parâmetros
-        $stmt->bind_param("ssssssssss", $nomeCompleto, $numeroTel, $cpf, $setor, $emailPessoal, $emailCorporativo, $senha, $biografia, $competencias, $empresa);
+        // Associe os parâmetros sem o CPF
+        $stmt->bind_param("sssssssss", $nomeCompleto, $numeroTel, $setor, $emailPessoal, $emailCorporativo, $senha, $biografia, $competencias, $empresa);
         
         // Execute a consulta
         if ($stmt->execute()) {

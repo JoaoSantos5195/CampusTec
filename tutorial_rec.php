@@ -60,6 +60,7 @@ include('header_rec.php');
 
 <body>
 
+
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>
@@ -71,16 +72,7 @@ include('header_rec.php');
         <a href="sobre_nos.html">Sobre Nós</a>
     </div>
 
-    <h1>Postagem de Eventos</h1>
-
-    <!-- Formulário de Postagem -->
-    <form action="postar_evento.php" method="POST">
-        <input type="text" name="eventName" placeholder="Nome do Evento" required>
-        <input type="date" name="eventDate" required>
-        <input type="text" name="eventLocation" placeholder="Local do Evento" required>
-        <input type="url" name="eventMapLink" placeholder="Link do Google Maps" required>
-        <button type="submit" class="addEvent">Adicionar Evento</button>
-    </form>
+    <iframe src="https://gamma.app/embed/9ym17sgazuu47ns" style="width: 90%; height: 550px; margin-top: 40px; margin-left: 75px" allow="fullscreen" title="CampusTec: Sistema de Empregabilidade – WebApp"></iframe>
 
 </body>
 

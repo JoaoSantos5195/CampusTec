@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,21 +159,15 @@
         </div>
     </header>
 
-<div id="side-menu" class="side-menu">
-<a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
-        <a href="#">Tutorial</a>
-        <a href="candidatos.php">Candidatos</a>
-        <a href="eventosRecrutador.php">Eventos</a>
-        <a href="editar_perfil_rec.php">Configurações</a>
-
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
-        <a href="#">Tutorial</a>
+        <a href="tutorial_rec.php">Como usar o sistema</a>
+
         <a href="candidatos.php">Candidatos</a>
         <a href="eventosRecrutador.php">Meus Eventos</a>
         <a href="postar_evento.php">Adicionar evento</a>
-        <a href="editar_perfil_rec.php">Configurações</a>
-        <a href="sobre_nos.php">Sobre Nós</a>
+        <a href="editar_perfil_rec.php">Editar Perfil</a>
+        <a href="sobre_nos_rec.php">Sobre Nós</a>
         <a href="logout.php">Logout</a>
     </div>
 
@@ -189,72 +181,73 @@
 
 
 
-</div>
-<div class="search-container">
-    <h1 id="buscar">Lista de Candidatos</h1>
-    <div class="filter-container">
-        <form action="" method="GET">
-            <label for="filter">Filtrar Candidatos:</label>
-            <select name="filter" id="filter">
-                <optgroup label="Selecione uma opção">
-                    <option value="curriculo">Com Currículo</option>
-                    <option value="soft_skills">Com Soft Skills</option>
-                    <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
-                </optgroup>
-                <optgroup label="Tecnologia">
-                    <option value="dsEtim">Desenvolvimento de Sistemas (ETIM)</option>
-                    <option value="ciencia_computacao">Ciência da Computação</option>
-                </optgroup>
-                <optgroup label="Saúde">
-                    <option value="nutriEtim">Nutrição (ETIM)</option>
-                    <option value="medicina">Medicina</option>
-                    <option value="enfermagem">Enfermagem</option>
-                    <option value="psicologia">Psicologia</option>
-                    <option value="odontologia">Odontologia</option>
-                    <option value="fisioterapia">Fisioterapia</option>
-                    <option value="biomedicina">Biomedicina</option>
-                    <option value="educacao_fisica">Educação Física</option>
-                </optgroup>
-                <optgroup label="Engenharias">
-                    <option value="engenharia_civil">Engenharia Civil</option>
-                    <option value="engenharia_eletrica">Engenharia Elétrica</option>
-                </optgroup>
-                <optgroup label="Humanas">
-                    <option value="direito">Direito</option>
-                    <option value="geografia">Geografia</option>
-                    <option value="historia">História</option>
-                    <option value="filosofia">Filosofia</option>
-                    <option value="pedagogia">Pedagogia</option>
-                    <option value="jornalismo">Jornalismo</option>
-                    <option value="letras">Letras</option>
-                </optgroup>
-                <optgroup label="Exatas">
-                    <option value="arquitetura">Arquitetura</option>
-                    <option value="matematica">Matemática</option>
-                    <option value="fisica">Física</option>
-                    <option value="quimica">Química</option>
-                    <option value="economia">Economia</option>
-                </optgroup>
-                <optgroup label="Artes e Comunicação">
-                    <option value="publicidade">Publicidade</option>
-                    <option value="design">Design</option>
-                    <option value="teatro">Teatro</option>
-                    <option value="musica">Música</option>
-                </optgroup>
-                <optgroup label="Administração e Negócios">
-                    <option value="administracao">Administração</option>
-                </optgroup>
-                <optgroup label="Culinária e Gastronomia">
-                    <option value="gastronomia">Gastronomia</option>
-                </optgroup>
-            </select>
-
-            <button type="submit">Aplicar Filtro</button>
-        </form>
     </div>
-    <div id="resultado-busca" class="resultado-busca">
-        <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
-        <?php
+    <div class="search-container">
+        <h1 id="buscar">Lista de Candidatos</h1>
+        <div class="filter-container" style="font-size: 26px; margin-top:20px;">
+
+            <form action="" method="GET">
+                <label for="filter">Filtrar Candidatos:</label>
+                <select name="filter" id="filter">
+                    <optgroup label="Selecione uma opção">
+                        <option value="curriculo">Com Currículo</option>
+                        <option value="soft_skills">Com Soft Skills</option>
+                        <option value="email_institucional">E-mail Institucional (@etec.sp.gov.br)</option>
+                    </optgroup>
+                    <optgroup label="Tecnologia">
+                        <option value="dsEtim">Desenvolvimento de Sistemas (ETIM)</option>
+                        <option value="ciencia_computacao">Ciência da Computação</option>
+                    </optgroup>
+                    <optgroup label="Saúde">
+                        <option value="nutriEtim">Nutrição (ETIM)</option>
+                        <option value="medicina">Medicina</option>
+                        <option value="enfermagem">Enfermagem</option>
+                        <option value="psicologia">Psicologia</option>
+                        <option value="odontologia">Odontologia</option>
+                        <option value="fisioterapia">Fisioterapia</option>
+                        <option value="biomedicina">Biomedicina</option>
+                        <option value="educacao_fisica">Educação Física</option>
+                    </optgroup>
+                    <optgroup label="Engenharias">
+                        <option value="engenharia_civil">Engenharia Civil</option>
+                        <option value="engenharia_eletrica">Engenharia Elétrica</option>
+                    </optgroup>
+                    <optgroup label="Humanas">
+                        <option value="direito">Direito</option>
+                        <option value="geografia">Geografia</option>
+                        <option value="historia">História</option>
+                        <option value="filosofia">Filosofia</option>
+                        <option value="pedagogia">Pedagogia</option>
+                        <option value="jornalismo">Jornalismo</option>
+                        <option value="letras">Letras</option>
+                    </optgroup>
+                    <optgroup label="Exatas">
+                        <option value="arquitetura">Arquitetura</option>
+                        <option value="matematica">Matemática</option>
+                        <option value="fisica">Física</option>
+                        <option value="quimica">Química</option>
+                        <option value="economia">Economia</option>
+                    </optgroup>
+                    <optgroup label="Artes e Comunicação">
+                        <option value="publicidade">Publicidade</option>
+                        <option value="design">Design</option>
+                        <option value="teatro">Teatro</option>
+                        <option value="musica">Música</option>
+                    </optgroup>
+                    <optgroup label="Administração e Negócios">
+                        <option value="administracao">Administração</option>
+                    </optgroup>
+                    <optgroup label="Culinária e Gastronomia">
+                        <option value="gastronomia">Gastronomia</option>
+                    </optgroup>
+                </select>
+
+                <button type="submit">Aplicar Filtro</button>
+            </form>
+        </div>
+        <div id="resultado-busca" class="resultado-busca">
+            <!-- O arquivo PHP será incluído diretamente aqui para exibir os recrutadores -->
+            <?php
 
             use PHPMailer\PHPMailer\PHPMailer;
             use PHPMailer\PHPMailer\Exception;
@@ -272,6 +265,7 @@
             $whereClause = [];
             $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
 
+            // Adiciona filtros com base no valor do parâmetro 'filter'
             switch ($filter) {
                 case 'curriculo':
                     $whereClause[] = "curriculo IS NOT NULL"; // Filtrar candidatos com currículo
@@ -282,17 +276,105 @@
                 case 'email_institucional':
                     $whereClause[] = "emailInstitucional LIKE '%@etec.sp.gov.br'"; // Filtrar e-mails institucionais
                     break;
+                    // Filtros por curso
+                case 'dsEtim':
+                    $whereClause[] = "curso LIKE '%dsEtim%'";
+                    break;
+                case 'ciencia_computacao':
+                    $whereClause[] = "curso LIKE '%Ciência da Computação%'";
+                    break;
+                case 'nutriEtim':
+                    $whereClause[] = "curso LIKE '%Nutrição (ETIM)%'";
+                    break;
+                case 'medicina':
+                    $whereClause[] = "curso LIKE '%Medicina%'";
+                    break;
+                case 'enfermagem':
+                    $whereClause[] = "curso LIKE '%Enfermagem%'";
+                    break;
+                case 'psicologia':
+                    $whereClause[] = "curso LIKE '%Psicologia%'";
+                    break;
+                case 'odotonlogia':
+                    $whereClause[] = "curso LIKE '%Odontologia%'";
+                    break;
+                case 'fisioterapia':
+                    $whereClause[] = "curso LIKE '%Fisioterapia%'";
+                    break;
+                case 'biomedicina':
+                    $whereClause[] = "curso LIKE '%Biomedicina%'";
+                    break;
+                case 'educacao_fisica':
+                    $whereClause[] = "curso LIKE '%Educação Física%'";
+                    break;
+                case 'engenharia_civil':
+                    $whereClause[] = "curso LIKE '%Engenharia Civil%'";
+                    break;
+                case 'engenharia_eletrica':
+                    $whereClause[] = "curso LIKE '%Engenharia Elétrica%'";
+                    break;
+                case 'direito':
+                    $whereClause[] = "curso LIKE '%Direito%'";
+                    break;
+                case 'geografia':
+                    $whereClause[] = "curso LIKE '%Geografia%'";
+                    break;
+                case 'historia':
+                    $whereClause[] = "curso LIKE '%História%'";
+                    break;
+                case 'filosofia':
+                    $whereClause[] = "curso LIKE '%Filosofia%'";
+                    break;
+                case 'pedagogia':
+                    $whereClause[] = "curso LIKE '%Pedagogia%'";
+                    break;
+                case 'jornalismo':
+                    $whereClause[] = "curso LIKE '%Jornalismo%'";
+                    break;
+                case 'letras':
+                    $whereClause[] = "curso LIKE '%Letras%'";
+                    break;
+                case 'arquitetura':
+                    $whereClause[] = "curso LIKE '%Arquitetura%'";
+                    break;
+                case 'matematica':
+                    $whereClause[] = "curso LIKE '%Matemática%'";
+                    break;
+                case 'fisica':
+                    $whereClause[] = "curso LIKE '%Física%'";
+                    break;
+                case 'quimica':
+                    $whereClause[] = "curso LIKE '%Química%'";
+                    break;
+                case 'economia':
+                    $whereClause[] = "curso LIKE '%Economia%'";
+                    break;
+                case 'publicidade':
+                    $whereClause[] = "curso LIKE '%Publicidade%'";
+                    break;
+                case 'desing':
+                    $whereClause[] = "curso LIKE '%Desing%'";
+                    break;
+                case 'teatro':
+                    $whereClause[] = "curso LIKE '%Teatro%'";
+                    break;
+                case 'musica':
+                    $whereClause[] = "curso LIKE '%Música%'";
+                    break;
+                case 'administracao':
+                    $whereClause[] = "curso LIKE '%Administração%'";
+                    break;
+                case 'gastronomia':
+                    $whereClause[] = "curso LIKE '%Gastronomia%'";
+                    break;
+                default:
+                    // Sem filtro específico aplicado
+                    break;
             }
 
-            // Verifica a existência do filtro de área opcionalmente
-            $area = isset($_GET['area']) ? $conn->real_escape_string($_GET['area']) : '';
-            if (!empty($area)) {
-                $whereClause[] = "curso = '$area'"; // Filtrar candidatos por curso
-            }
-
-            // Concatena as cláusulas WHERE, se existirem
+            // Monta a cláusula WHERE da consulta, se houver condições
             if (!empty($whereClause)) {
-                $sql .= ' WHERE ' . implode(' AND ', $whereClause);
+                $sql .= " WHERE " . implode(" AND ", $whereClause);
             }
 
             // Prepara e executa a consulta
@@ -316,7 +398,7 @@
                         echo '</div>';
                     }
                 } else {
-                    echo '<p>Nenhum usuário encontrado com o filtro selecionado.</p>';
+                    echo '<h2 style="color: white; text-align: center; margin-top: 40px;">Nenhum usuário encontrado com o filtro selecionado.</h2>';
                 }
 
                 // Fecha a declaração
@@ -327,36 +409,37 @@
 
             // Fecha a conexão
             $conn->close();
-        ?>
-    </div>
+            ?>
+
+        </div>
 
 
 
-    <footer id="footer">
-        <p>&copy; 2024 CampusTec. Todos os direitos reservados.</p>
-    </footer>
+        <footer id="footer">
+            <p>&copy; 2024 CampusTec. Todos os direitos reservados.</p>
+        </footer>
 
-    <script>
-        function openMenu() {
-            document.getElementById("side-menu").style.width = "250px";
-        }
+        <script>
+            function openMenu() {
+                document.getElementById("side-menu").style.width = "250px";
+            }
 
-        function closeMenu() {
-            document.getElementById("side-menu").style.width = "0";
-        }
+            function closeMenu() {
+                document.getElementById("side-menu").style.width = "0";
+            }
 
-        document.getElementById("menu-btn").onclick = openMenu;
+            document.getElementById("menu-btn").onclick = openMenu;
 
-        // Função para lidar com o clique do botão de candidatura
-        function candidatarSe(event, botaoId) {
-            event.preventDefault(); // Previne o envio do formulário
-            var botao = document.getElementById(botaoId);
-            botao.textContent = 'Você se candidatou!';
-            botao.disabled = true; // Desativa o botão após a candidatura
-        }
-    </script>
+            // Função para lidar com o clique do botão de candidatura
+            function candidatarSe(event, botaoId) {
+                event.preventDefault(); // Previne o envio do formulário
+                var botao = document.getElementById(botaoId);
+                botao.textContent = 'Você se candidatou!';
+                botao.disabled = true; // Desativa o botão após a candidatura
+            }
+        </script>
 
-    <script src="js/notificacao.js"></script>
+        <script src="js/notificacao.js"></script>
 </body>
 
 </html>

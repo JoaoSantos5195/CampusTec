@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Receber os novos dados do formulário
     $novoNomeCompleto = isset($_POST['nomeCompleto']) ? trim($_POST['nomeCompleto']) : null;
     $novoNumeroTel = isset($_POST['numeroTel']) ? trim($_POST['numeroTel']) : null;
-    $novoCpf = isset($_POST['cpf']) ? trim($_POST['cpf']) : null;
     $novoSetor = isset($_POST['setor']) ? trim($_POST['setor']) : null;
     $novoEmailPessoal = isset($_POST['emailPessoal']) ? trim($_POST['emailPessoal']) : null;
     $novoEmailCorporativo = isset($_POST['emailCorporativo']) ? trim($_POST['emailCorporativo']) : null;
@@ -65,11 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($novoNumeroTel && $novoNumeroTel != $row['numeroTel']) {
             $campos_para_atualizar[] = "numeroTel = ?";
             $valores_para_atualizar[] = $novoNumeroTel;
-        }
-
-        if ($novoCpf && $novoCpf != $row['cpf']) {
-            $campos_para_atualizar[] = "cpf = ?";
-            $valores_para_atualizar[] = $novoCpf;
         }
 
         if ($novoSetor && $novoSetor != $row['setor']) {
