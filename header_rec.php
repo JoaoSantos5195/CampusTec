@@ -116,13 +116,9 @@
 
 <div id="side-menu" class="side-menu">
     <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
-<<<<<<< Updated upstream
     <a href="tutorial_rec.php">Como usar o sistema</a>
-    <a href="perfilRecrutador.php#vagas">Adicionar vagas</a>
-=======
-    <a href="#">Tutorial</a>
     <a href="feedRec.php">Feed</a>
->>>>>>> Stashed changes
+    <a href="perfilRecrutador.php#vagas">Adicionar vagas</a>
     <a href="candidatos.php">Candidatos</a>
     <a href="eventosRecrutador.php">Meus Eventos</a>
     <a href="postar_evento.php">Adicionar evento</a>

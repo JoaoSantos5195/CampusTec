@@ -2,11 +2,6 @@
 include('conexao.php');
 
 $sql = "
-<<<<<<< Updated upstream
-    SELECT p.id, p.texto, p.imagem, p.data_postagem, u.nomeCompleto 
-    FROM posts p
-    JOIN usuarios u ON p.usuario_id = u.id
-=======
     SELECT 
         p.post_id, 
         p.texto, 
@@ -20,17 +15,12 @@ $sql = "
     FROM posts p
     LEFT JOIN usuarios u ON p.usuario_id = u.id
     LEFT JOIN recrutadores r ON p.recrutador_id = r.id
->>>>>>> Stashed changes
     ORDER BY p.data_postagem DESC";
 
 $result = $conn->query($sql);
 
-<<<<<<< Updated upstream
-if ($result->num_rows > 0) {
-=======
 if ($result && $result->num_rows > 0) {
     // Exibir postagens
->>>>>>> Stashed changes
     while ($row = $result->fetch_assoc()) {
         echo "
         <div class='post'>

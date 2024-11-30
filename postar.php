@@ -28,10 +28,6 @@ if (!empty($_FILES['imagem']['name'])) {
     }
 }
 
-<<<<<<< Updated upstream
-// Obter ID do usuário logado
-$sql_user = "SELECT id FROM usuarios WHERE emailInstitucional = ? OR emailPessoal = ?";
-=======
 // Obter ID e tipo do usuário logado
 $sql_user = "
     SELECT id, 'usuario' AS tipo_autor 
@@ -40,31 +36,26 @@ $sql_user = "
     UNION 
     SELECT id, 'recrutador' AS tipo_autor 
     FROM recrutadores 
-    WHERE emailPessoal = ?
-";
->>>>>>> Stashed changes
+    WHERE emailPessoal = ?";
 $stmt_user = $conn->prepare($sql_user);
 $stmt_user->bind_param("ss", $email, $email);
 $stmt_user->execute();
-$stmt_user->bind_result($usuario_id);
+$stmt_user->bind_result($usuario_id, $tipo_autor);
 $stmt_user->fetch();
 $stmt_user->close();
 
 // Inserir a postagem no banco de dados
-<<<<<<< Updated upstream
-$sql_post = "INSERT INTO posts (usuario_id, texto, imagem) VALUES (?, ?, ?)";
-=======
 if ($tipo_autor === 'usuario') {
     $sql_post = "INSERT INTO posts (usuario_id, tipo_autor, texto, imagem) VALUES (?, ?, ?, ?)";
+    $stmt_post = $conn->prepare($sql_post);
+    $stmt_post->bind_param("isss", $usuario_id, $tipo_autor, $texto, $arquivo);
 } else if ($tipo_autor === 'recrutador') {
     $sql_post = "INSERT INTO posts (recrutador_id, tipo_autor, texto, imagem) VALUES (?, ?, ?, ?)";
+    $stmt_post = $conn->prepare($sql_post);
+    $stmt_post->bind_param("isss", $usuario_id, $tipo_autor, $texto, $arquivo);
 } else {
     die("Erro: Tipo de autor inválido.");
 }
-
->>>>>>> Stashed changes
-$stmt_post = $conn->prepare($sql_post);
-$stmt_post->bind_param("iss", $usuario_id, $texto, $arquivo);
 
 if ($stmt_post->execute()) {
     echo "
@@ -85,6 +76,10 @@ $conn->close();
 // Função para renderizar imagem ou vídeo
 function renderizarArquivo($caminho)
 {
+    if (empty($caminho)) {
+        return "";
+    }
+
     $extensao = strtolower(pathinfo($caminho, PATHINFO_EXTENSION));
     if (in_array($extensao, ['jpg', 'jpeg', 'png', 'gif'])) {
         return "<img src='$caminho' alt='Imagem da Postagem' style='max-width:100%;'>";
