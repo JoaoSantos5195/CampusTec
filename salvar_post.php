@@ -2,85 +2,94 @@
 session_start();
 include 'conexao.php';
 
-<<<<<<< Updated upstream
-// Verifica se as variáveis necessárias estão definidas
-if (isset($_SESSION['usuario_id']) && isset($_POST['post_id'])) {
-    $usuario_id = $_SESSION['usuario_id'];
-    $post_id = $_POST['post_id'];
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
 
-    // Prepara a query
-    $sql = "INSERT INTO posts_salvos (usuario_id, post_id) VALUES (?, ?)";
-=======
-if (isset($_SESSION['email']) && isset($_POST['post_id'])) {
-    $email = $_SESSION['email'];
-    $post_id = $_POST['post_id'];
+$email = $_SESSION['email'];
+$texto = $_POST['texto'];
+$arquivo = ''; // Caminho do arquivo (imagem ou vídeo)
 
-    // Identificar o usuário (candidato ou recrutador)
-    $sql = "
-        SELECT id, 'usuario' AS tipo_autor FROM usuarios WHERE emailPessoal = ?
-        UNION
-        SELECT id, 'recrutador' AS tipo_autor FROM recrutadores WHERE emailPessoal = ?
-    ";
->>>>>>> Stashed changes
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $email, $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// Verificar se um arquivo foi enviado
+if (!empty($_FILES['imagem']['name'])) {
+    $upload_dir = 'uploads/';
+    $nome_arquivo = basename($_FILES['imagem']['name']);
+    $arquivo = $upload_dir . $nome_arquivo;
 
-<<<<<<< Updated upstream
-    // Verifica se a preparação da query foi bem-sucedida
-    if ($stmt) {
-        $stmt->bind_param("ii", $usuario_id, $post_id);
-        if ($stmt->execute()) {
-            echo "Postagem salva com sucesso!";
-        } else {
-            echo "Erro ao salvar a postagem: " . $stmt->error;
-        }
-        $stmt->close();
-    } else {
-        echo "Erro ao preparar a query: " . $conn->error;
-=======
-    if ($result->num_rows > 0) {
-        $user_data = $result->fetch_assoc();
-        $usuario_id = $user_data['id'];
-        $tipo_autor = $user_data['tipo_autor'];
-
-        // Verificar se o post existe
-        $sql_check_post = "SELECT post_id FROM posts WHERE post_id = ?";
-        $stmt_check_post = $conn->prepare($sql_check_post);
-        $stmt_check_post->bind_param("i", $post_id);
-        $stmt_check_post->execute();
-
-        if ($stmt_check_post->get_result()->num_rows === 0) {
-            die("Erro: Postagem inválida.");
-        }
-
-        // Inserir no banco, levando em conta o tipo do autor
-        $sql_save = "
-            INSERT INTO posts_salvos (usuario_id, post_id, tipo_autor) 
-            VALUES (?, ?, ?)
-        ";
-        $stmt_save = $conn->prepare($sql_save);
-        $stmt_save->bind_param("iis", $usuario_id, $post_id, $tipo_autor);
-
-        if ($stmt_save->execute()) {
-            echo "Postagem salva com sucesso!";
-        } else {
-            echo "Erro ao salvar a postagem: " . $stmt_save->error;
-        }
-
-        $stmt_save->close();
-    } else {
-        echo "Erro: Usuário não encontrado.";
->>>>>>> Stashed changes
+    // Verificar se a pasta existe ou criar
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
     }
 
-    $stmt->close();
-} else {
-    echo "Erro: Dados insuficientes para salvar a postagem.";
+    // Mover o arquivo enviado para a pasta de uploads
+    if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $arquivo)) {
+        die("Erro ao fazer upload do arquivo.");
+    }
 }
-<<<<<<< Updated upstream
-=======
 
+// Obter ID e tipo do usuário logado
+$sql_user = "
+    SELECT id, 'usuario' AS tipo_autor 
+    FROM usuarios 
+    WHERE emailPessoal = ? 
+    UNION 
+    SELECT id, 'recrutador' AS tipo_autor 
+    FROM recrutadores 
+    WHERE emailPessoal = ?";
+$stmt_user = $conn->prepare($sql_user);
+$stmt_user->bind_param("ss", $email, $email);
+$stmt_user->execute();
+$stmt_user->bind_result($usuario_id, $tipo_autor);
+$stmt_user->fetch();
+$stmt_user->close();
+
+// Inserir a postagem no banco de dados
+if ($tipo_autor === 'usuario') {
+    $sql_post = "INSERT INTO posts (usuario_id, tipo_autor, texto, imagem) VALUES (?, ?, ?, ?)";
+    $stmt_post = $conn->prepare($sql_post);
+    $stmt_post->bind_param("isss", $usuario_id, $tipo_autor, $texto, $arquivo);
+} else if ($tipo_autor === 'recrutador') {
+    $sql_post = "INSERT INTO posts (recrutador_id, tipo_autor, texto, imagem) VALUES (?, ?, ?, ?)";
+    $stmt_post = $conn->prepare($sql_post);
+    $stmt_post->bind_param("isss", $usuario_id, $tipo_autor, $texto, $arquivo);
+} else {
+    die("Erro: Tipo de autor inválido.");
+}
+
+if ($stmt_post->execute()) {
+    echo "
+    <div class='post'>
+        <h3>Postado por você</h3>
+        <p>" . htmlspecialchars($texto) . "</p>
+        " . renderizarArquivo($arquivo) . "
+        <button class='salvar' data-id='{$stmt_post->insert_id}'>Salvar</button>
+        <button class='compartilhar'>Compartilhar</button>
+    </div>";
+} else {
+    echo "Erro ao postar: " . $stmt_post->error;
+}
+
+$stmt_post->close();
 $conn->close();
->>>>>>> Stashed changes
+
+// Função para renderizar imagem ou vídeo
+function renderizarArquivo($caminho)
+{
+    if (empty($caminho)) {
+        return "";
+    }
+
+    $extensao = strtolower(pathinfo($caminho, PATHINFO_EXTENSION));
+    if (in_array($extensao, ['jpg', 'jpeg', 'png', 'gif'])) {
+        return "<img src='$caminho' alt='Imagem da Postagem' style='max-width:100%;'>";
+    } elseif (in_array($extensao, ['mp4', 'webm', 'ogg'])) {
+        return "
+        <video controls style='max-width:100%;'>
+            <source src='$caminho' type='video/$extensao'>
+            Seu navegador não suporta este formato de vídeo.
+        </video>";
+    } else {
+        return "<p>[Arquivo não suportado]</p>";
+    }
+}
