@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexao.php'; 
+include 'conexao.php';
 
 if (!isset($_SESSION['email'])) {
     header("Location: login.php");
@@ -28,8 +28,21 @@ if (!empty($_FILES['imagem']['name'])) {
     }
 }
 
+<<<<<<< Updated upstream
 // Obter ID do usuário logado
 $sql_user = "SELECT id FROM usuarios WHERE emailInstitucional = ? OR emailPessoal = ?";
+=======
+// Obter ID e tipo do usuário logado
+$sql_user = "
+    SELECT id, 'usuario' AS tipo_autor 
+    FROM usuarios 
+    WHERE emailPessoal = ? 
+    UNION 
+    SELECT id, 'recrutador' AS tipo_autor 
+    FROM recrutadores 
+    WHERE emailPessoal = ?
+";
+>>>>>>> Stashed changes
 $stmt_user = $conn->prepare($sql_user);
 $stmt_user->bind_param("ss", $email, $email);
 $stmt_user->execute();
@@ -38,7 +51,18 @@ $stmt_user->fetch();
 $stmt_user->close();
 
 // Inserir a postagem no banco de dados
+<<<<<<< Updated upstream
 $sql_post = "INSERT INTO posts (usuario_id, texto, imagem) VALUES (?, ?, ?)";
+=======
+if ($tipo_autor === 'usuario') {
+    $sql_post = "INSERT INTO posts (usuario_id, tipo_autor, texto, imagem) VALUES (?, ?, ?, ?)";
+} else if ($tipo_autor === 'recrutador') {
+    $sql_post = "INSERT INTO posts (recrutador_id, tipo_autor, texto, imagem) VALUES (?, ?, ?, ?)";
+} else {
+    die("Erro: Tipo de autor inválido.");
+}
+
+>>>>>>> Stashed changes
 $stmt_post = $conn->prepare($sql_post);
 $stmt_post->bind_param("iss", $usuario_id, $texto, $arquivo);
 
@@ -59,7 +83,8 @@ $stmt_post->close();
 $conn->close();
 
 // Função para renderizar imagem ou vídeo
-function renderizarArquivo($caminho) {
+function renderizarArquivo($caminho)
+{
     $extensao = strtolower(pathinfo($caminho, PATHINFO_EXTENSION));
     if (in_array($extensao, ['jpg', 'jpeg', 'png', 'gif'])) {
         return "<img src='$caminho' alt='Imagem da Postagem' style='max-width:100%;'>";
@@ -73,4 +98,3 @@ function renderizarArquivo($caminho) {
         return "<p>[Arquivo não suportado]</p>";
     }
 }
-?>

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -71,3 +72,14 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+=======
+CREATE TABLE posts_salvos (
+    id INT(11) NOT NULL AUTO_INCREMENT,  -- Chave primária para identificar cada salvamento
+    usuario_id INT(11) NOT NULL,         -- ID do usuário que salvou o post
+    post_id INT(11) NOT NULL,            -- ID do post salvo
+    data_salvo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Data e hora do salvamento
+    PRIMARY KEY (id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+>>>>>>> Stashed changes
