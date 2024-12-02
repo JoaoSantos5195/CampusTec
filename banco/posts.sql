@@ -28,13 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `posts` (
-<<<<<<< Updated upstream
   `id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `texto` text DEFAULT NULL,
   `imagem` varchar(255) DEFAULT NULL,
-  `data_postagem` timestamp NOT NULL DEFAULT current_timestamp()
-=======
+  `data_postagem` timestamp NOT NULL DEFAULT current_timestamp(),
   `post_id` INT(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` INT(11) DEFAULT NULL,       -- Coluna para usuário
   `recrutador_id` INT(11) DEFAULT NULL,     -- Coluna para recrutador
@@ -49,9 +47,7 @@ CREATE TABLE `posts` (
   CONSTRAINT `fk_posts_recrutadores` FOREIGN KEY (`recrutador_id`) REFERENCES `recrutadores` (`id`) ON DELETE CASCADE,
   CHECK ((`tipo_autor` = 'usuario' AND `usuario_id` IS NOT NULL AND `recrutador_id` IS NULL) OR 
        (`tipo_autor` = 'recrutador' AND `recrutador_id` IS NOT NULL AND `usuario_id` IS NULL))
-
->>>>>>> Stashed changes
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `posts`
