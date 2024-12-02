@@ -48,7 +48,7 @@ function gerarPDF() {
 
     // Função para desenhar cabeçalhos das seções
     function drawSectionHeader(doc, title, x, y) {
-        doc.setFont("helvetica", "bold");
+        doc.setFont("helvetica", "normal");
         doc.setFontSize(16);
         doc.setDrawColor(0, 0, 0);
         doc.setFillColor(230, 230, 230); // Fundo cinza claro
