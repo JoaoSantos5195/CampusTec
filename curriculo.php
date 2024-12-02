@@ -16,7 +16,7 @@ include('header_candidato.php');
     <div class="formulario">
         <div class="main-curriculo">
             <h1>Criação de Currículo</h1>
-            <form id="curriculoForm">
+            <form id="curriculoForm" method="post">
                 <input type="text" id="nome" name="nome" placeholder="Nome" required><br><br>
                 <input type="email" id="email" name="email" placeholder="Email" required><br><br>
                 <input type="tel" id="telefone" name="telefone" placeholder="Telefone" required maxlength="15"
