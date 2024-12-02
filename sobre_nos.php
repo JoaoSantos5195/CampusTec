@@ -109,6 +109,7 @@ include('header_candidato.php');
 
 
         </div>
+        
 
     </section>
 

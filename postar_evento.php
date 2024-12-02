@@ -60,7 +60,6 @@ include('header_rec.php');
 
 <body>
 
-
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
         <a href="#">Tutorial</a>

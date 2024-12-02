@@ -111,7 +111,7 @@ $conn->close();
             ?>
         </ul>
     </div>
-
+<hr>
     <div id="vagas" class="vagas">
         <h2>Adicionar vagas</h2>
         <i class="bi bi-plus-circle abrirJanela" style="font-size: 2rem; cursor: pointer;"></i>

@@ -22,10 +22,9 @@ if ($conn->connect_error) {
 
 // Obter o email do usuário logado da sessão
 $email = trim($_SESSION['email']); // Usar trim para remover espaços
-    
 
 // Consultar o usuário pelo email
-$sql = "SELECT * FROM recrutadores WHERE emailPessoal = ?";
+$sql = "SELECT id, nomeCompleto, numeroTel, setor, emailPessoal, emailCorporativo, biografia, competencias, empresa FROM recrutadores WHERE emailPessoal = ?";
 $stmt = $conn->prepare($sql);
 
 if ($stmt === false) {
@@ -42,7 +41,6 @@ if ($result->num_rows > 0) {
     $user_id = htmlspecialchars($row['id']);
     $nomeCompleto = htmlspecialchars($row['nomeCompleto']);
     $numeroTel = htmlspecialchars($row['numeroTel']);
-    $cpf = htmlspecialchars($row['cpf']);
     $setor = htmlspecialchars($row['setor']);
     $emailPessoal = htmlspecialchars($row['emailPessoal']);
     $emailCorporativo = htmlspecialchars($row['emailCorporativo']);
@@ -94,12 +92,6 @@ $conn->close();
             </div>
 
             <div class="profile-item">
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" name="cpf" value="<?= $cpf ?>" disabled>
-                <button type="button" class="edit-btn" onclick="enableEdit('cpf')">Editar</button>
-            </div>
-
-            <div class="profile-item">
                 <label for="setor">Setor:</label>
                 <input type="text" id="setor" name="setor" value="<?= $setor ?>" disabled>
                 <button type="button" class="edit-btn" onclick="enableEdit('setor')">Editar</button>
@@ -147,18 +139,6 @@ $conn->close();
         <p>&copy; 2024 CampusTec. Todos os direitos reservados.</p>
     </footer>
 
-    <?php
-    // Exibir mensagem baseada em query string 'msg'
-    if (isset($_GET['msg'])) {
-        if ($_GET['msg'] == "sucesso") {
-            echo "<p class='message'>Perfil atualizado com sucesso!</p>";
-        } elseif ($_GET['msg'] == "erro") {
-            echo "<p class='message' style='color:red;'>Erro ao atualizar perfil. Tente novamente.</p>";
-        } elseif ($_GET['msg'] == "sem_alteracoes") {
-            echo "<p class='message' style='color:blue;'>Nenhuma alteração foi feita.</p>";
-        }
-    }
-    ?>
 
     <script>
         function openMenu() {

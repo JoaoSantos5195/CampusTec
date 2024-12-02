@@ -1,10 +1,11 @@
 <?php
 session_start();
-include('header_candidato.php'); // Header da página
+include('header_rec.php'); // Header da página
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@ include('header_candidato.php'); // Header da página
     <link rel="stylesheet" href="css/feed.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
     <div class="button">
         <button class="btn-nova-postagem">Nova Postagem</button>
@@ -43,22 +45,22 @@ include('header_candidato.php'); // Header da página
 
     <!-- Área do Feed -->
     <div id="feed">
-        <?php include 'carregar_posts.php'; ?> <!-- Exibe os posts -->
+        <?php include 'carregarPostRec.php'; ?> <!-- Exibe os posts do rec -->
     </div>
 
     <script>
         // Exibir o modal de Nova Postagem
-        $(".btn-nova-postagem").click(function () {
+        $(".btn-nova-postagem").click(function() {
             $("#modal-postagem").fadeIn();
         });
 
         // Fechar modais
-        $(".close").click(function () {
+        $(".close").click(function() {
             $(".modal").fadeOut();
         });
 
         // Submeter o formulário de postagem via AJAX
-        $("#form-postagem").submit(function (e) {
+        $("#form-postagem").submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
 
@@ -68,7 +70,7 @@ include('header_candidato.php'); // Header da página
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (response) {
+                success: function(response) {
                     $("#feed").prepend(response); // Adiciona a nova postagem no topo
                     $("#modal-postagem").fadeOut();
                     $("#form-postagem")[0].reset(); // Limpa o formulário
@@ -77,7 +79,7 @@ include('header_candidato.php'); // Header da página
         });
 
         // Exibir o modal de Compartilhar com o link da página
-        $("#btn-compartilhar").click(function () {
+        $("#btn-compartilhar").click(function() {
             var urlAtual = window.location.href;
             $("#link-compartilhar").val(urlAtual);
             $("#modal-compartilhar").fadeIn();
@@ -93,10 +95,11 @@ include('header_candidato.php'); // Header da página
         }
 
         // Remover a funcionalidade de salvar postagens (botão sem ação)
-        $(document).on('click', '.salvar', function () {
+        $(document).on('click', '.salvar', function() {
             // Remover ação do botão
             alert("Post salvo com sucesso.");
         });
     </script>
 </body>
+
 </html>

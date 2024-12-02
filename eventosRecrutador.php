@@ -3,7 +3,7 @@ include('conexao.php');
 session_start();
 include('header_rec.php');
 
-// Verifica se o usuário está logado e obtém seu email
+// Verifica se o usuário está logado e obtém seu ID
 if (!isset($_SESSION["id_recrutador"])) {
     header("Location: login.php");
     exit();
@@ -11,16 +11,20 @@ if (!isset($_SESSION["id_recrutador"])) {
 
 $criador_id = $_SESSION["id_recrutador"];
 
-// Selecionar eventos criados pelo usuário logado
+// Seleciona eventos criados pelo usuário logado
 $sql = "SELECT id, nome, data, local, google_maps_link FROM eventos WHERE criador_id = ?";
 $stmt = $conn->prepare($sql);
 
-// Corrigido: usar "s" para strings no bind_param
-$stmt->bind_param("s", $criador_id);
+if (!$stmt) {
+    // Erro ao preparar a consulta
+    die("Erro ao preparar a consulta: " . $conn->error);
+}
+
+// Corrigido: usar "i" para inteiros no bind_param (ajuste conforme necessário)
+$stmt->bind_param("i", $criador_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -28,13 +32,11 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Meus Eventos</title>
     <link rel="stylesheet" href="css/visualizar_evento.css">
 </head>
 
 <body>
-
     <h1>Meus Eventos</h1>
 
     <?php
@@ -44,14 +46,14 @@ $result = $stmt->get_result();
             $buttonId = 'credencial' . md5($row['nome']);
 
             echo "<div class='event'>";
-            echo "<h3>" . $row["nome"] . "</h3>";
-            echo "<p>Data: " . $row["data"] . "</p>";
-            echo "<p>Local: " . $row["local"] . "</p>";
+            echo "<h3>" . htmlspecialchars($row["nome"]) . "</h3>";
+            echo "<p>Data: " . htmlspecialchars($row["data"]) . "</p>";
+            echo "<p>Local: " . htmlspecialchars($row["local"]) . "</p>";
 
             echo "<button id='$buttonId' onclick='openModal(\"$modalId\")'>Credenciar-me</button>";
 
             if (!empty($row["google_maps_link"])) {
-                $embedLink = str_replace("/maps/", "/maps/embed?", $row["google_maps_link"]);
+                $embedLink = str_replace("/maps/", "/maps/embed?", htmlspecialchars($row["google_maps_link"]));
                 echo "<iframe src='$embedLink' allowfullscreen></iframe>";
             }
 
@@ -60,8 +62,8 @@ $result = $stmt->get_result();
             echo        "<span class='close' onclick='closeModal(\"$modalId\")'>&times;</span>";
             echo        "<h2>Credenciamento para o evento</h2>";
             echo        "<form id='credenciamentoForm' action='enviar_credencial.php' method='post'>";
-            echo            "<input type='hidden' name='nome_evento' value='" . $row['nome'] . "'>";
-            echo            "<input type='hidden' name='local_evento' value='" . $row['local'] . "'>";
+            echo            "<input type='hidden' name='nome_evento' value='" . htmlspecialchars($row['nome']) . "'>";
+            echo            "<input type='hidden' name='local_evento' value='" . htmlspecialchars($row['local']) . "'>";
             echo            "<div class='form-group'>";
             echo                "<label for='nome'>Nome Completo:</label>";
             echo                "<input type='text' id='nome' name='nome' required>";
