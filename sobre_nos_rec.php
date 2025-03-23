@@ -101,11 +101,11 @@ include('header_rec.php');
             <h2>Criadores</h2><br>
 
             <ul>
-                <li>Arthur Santana dos Santos - Desenvolvedor Full-Stack</li>
-                <li>Bruno Rodrigues da Costa - Gestor</li>
-                <li>João Pedro da Penha Santos - Desenvolvedor Full-Stack</li>
-                <li>Kaio Jesus de Sousa - Designer</li>
-                <li>Kauê Nunes dos Santos - Designer</li>
+                <li>Arthur Santana dos Santos - Desenvolvedor Full-Stack <a href="https://www.linkedin.com/in/arthursantosdev/" style="color: white; font-weight: bold; font-size: 21px; margin-left: 10px;" target="_blank">LinkedIn</a></li>
+                <li>Bruno Rodrigues da Costa - Gestor <a href="https://www.linkedin.com/in/bruno-rodrigues-da-costa-/" style="color: white; font-weight: bold; font-size: 21px; margin-left: 10px;" target="_blank">LinkedIn</a></li>
+                <li>João Pedro da Penha Santos - Desenvolvedor Full-Stack <a href="https://www.linkedin.com/in/jpsantosdev/" style="color: white; font-weight: bold; font-size: 21px; margin-left: 10px;" target="_blank">LinkedIn</a></li>
+                <li>Kaio Jesus de Sousa - Designer <a href="https://www.linkedin.com/in/kaio-sousa-47387b33a/" style="color: white; font-weight: bold; font-size: 21px; margin-left: 10px;" target="_blank">LinkedIn</a></li>
+                <li>Kauê Nunes dos Santos - Designer <a href="https://www.linkedin.com/in/kauesantos2007/" style="color: white; font-weight: bold; font-size: 21px; margin-left: 10px;" target="_blank">LinkedIn</a></li>
             </ul>
 
 

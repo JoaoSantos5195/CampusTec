@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('conexao.php');
 include('header_candidato.php');
 
 // Verificar se o usuário está logado
@@ -8,12 +9,6 @@ if (!isset($_SESSION['email'])) {
     header("Location: login.html");
     exit();
 }
-
-// Conectar ao banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "campustec";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

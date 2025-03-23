@@ -9,13 +9,12 @@ require 'PHPMailer/src/SMTP.php';
 
 session_start(); // Inicia a sessão para acessar os dados do usuário logado
 
-// Conexão com o banco de dados
 $servername = "localhost";
-$username = "root";
-$password = "";
-$database = "campustec";
+$username = "campust1_campustec";
+$password = "joao2364";
+$dbname = "campust1_campustec";
 
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busca'])) {

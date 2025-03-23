@@ -50,12 +50,6 @@ if (isset($_GET['id'])) {
         </a>
         <div class="center">
             <div class="menu">
-                <a href="chat-novo/escolha.php">
-                    <button style="background-color: transparent; border: none; cursor: pointer; display: flex; float: right;"
-                        data-id="<?php echo htmlspecialchars($id_vaga); ?>">
-                        <img src="imagens/chat.png" style="width: 50px; margin-top: 8px">
-                    </button>
-                </a>
                 <a href="#"><img src="imagens/notificacaoBranco.png" id="notificacao" alt="Notificações"></a>
                 <a href="perfilUsuario.php"><img src="imagens/perfilBranco.png" id="perfil" alt="Perfil"></a>
                 <a href="#" id="menu-btn"><img src="imagens/menuBranco.png" id="menu" alt="Menu"></a>

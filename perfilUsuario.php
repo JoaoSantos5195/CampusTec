@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include('conexao.php');
 // Verificar se o usuário está logado
 if (!isset($_SESSION['email'])) {
     // Redirecionar para a página de login se não estiver logado
@@ -8,11 +8,6 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-// Conectar ao banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "campustec";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
